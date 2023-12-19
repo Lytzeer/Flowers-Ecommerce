@@ -15,6 +15,12 @@
         <p>{{ article.authorId }}</p>
         <a href="/article/{{ article.id }}">show</a>
         <a href="/article/{{ article.id }}/edit">edit</a>
+        <a href="{{ path('app_cart()') }}">back to list</a>
     {% endfor %}
 </div>
+<br></br>
+<br></br>
+<div>
+    <h1>cart</h1>
+</div
 {% endblock %}
