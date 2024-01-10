@@ -14,7 +14,7 @@
         </div>
     {% endif %}
 
-    {# <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Password</label>
@@ -26,8 +26,8 @@
 
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
-    </button> #}
-    <input type="hidden" name="_csrf_token"
+    </button>
+    {# <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
     <div class="example-wrapper bg-white min-h-screen grid grid-cols-2 text-black font-poppins">
@@ -60,6 +60,6 @@
         <div class="col-start-2">
             <img src="{{ asset('/img/login.png') }}" alt="Login Image" class="w-full h-screen">
         </div>
-    </div>
+    </div> #}
 </form>
 {% endblock %}
