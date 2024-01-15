@@ -67,9 +67,11 @@
                                 <button class="flex flex-row justify-center items-center bg-black text-white rounded-full h-12 w-full mt-8">
                                     <p class="font-bold text-sm">CHECKOUT</p>
                                 </button>
-                                <div class="flex flex-row justify-center">
-                                    <p class="border-b-2 border-black font-bold pt-4">View Cart</p>
-                                </div>
+                                <a href={{ path('app_cart') }}>
+                                    <div class="flex flex-row justify-center">
+                                        <p class="border-b-2 border-black font-bold pt-4">View Cart</p>
+                                    </div>
+                                </a>
                             </div>
                         </ul>
                     </div>
@@ -103,38 +105,54 @@
     </div>
     <div>
         <h1 class="font-bold text-4xl pl-14">BOUQUET</h1>
-        <div class="grid grid-cols-1 grid-rows-1 gap-4">
-            <div class="row-start-1 col-start-1 pl-14 w-2/5">
-                <div>
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom" class="h-96 w-auto">
-                    <h2 class="font-bold">Elegant Bloom - Bouquet</h2>
-                    <p class="opacity-50">119,99€</p>
+        <div class="px-14">
+            <div class="grid grid-cols-4 pb-14 gap-4">
+                <div class="col-start-1 col-end-1">
+                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
+                    <p class="font-bold text-2xl">Flower Orange</p>
+                    <p class="font-bold text-2xl">9,98€</p>
+                </div>
+                <div class="col-start-2 col-end-2">
+                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
+                    <p class="font-bold text-2xl">Flower Orange</p>
+                    <p class="font-bold text-2xl">9,98€</p>
+                </div>
+                <div class="col-start-3 col-end-3">
+                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
+                    <p class="font-bold text-2xl">Flower Orange</p>
+                    <p class="font-bold text-2xl">9,98€</p>
+                </div>
+                <div class="col-start-4 col-end-4">
+                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
+                    <p class="font-bold text-2xl">Flower Orange</p>
+                    <p class="font-bold text-2xl">9,98€</p>
                 </div>
             </div>
-            <div class="col-start-2">
-                <div class="flex flex-row justify-evenly">
-                    <div class="">
-                        <img src={{ asset('img/chic_blossom.png') }} alt="Chic Blossom" class="h-44">
-                        <h2 class="font-bold">Chic Blossom - Bouquet</h2>
-                        <p class="opacity-50">59,99€</p>
-                    </div>
-                    <div class="">
-                        <img src={{ asset('img/chic_blossom.png') }} alt="Chic Blossom" class="h-44">
-                        <h2 class="font-bold">Chic Blossom - Bouquet</h2>
-                        <p class="opacity-50">59,99€</p>
-                    </div>
+        </div>
+    </div>
+    <div>
+        <h1 class="font-bold text-4xl pl-14">FLEUR SEULE</h1>
+        <div class="px-14">
+            <div class="grid grid-cols-4 pb-14 gap-4">
+                <div class="col-start-1 col-end-1">
+                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
+                    <p class="font-bold text-2xl">Flower Orange</p>
+                    <p class="font-bold text-2xl">9,98€</p>
                 </div>
-                <div class="flex flex-row justify-around">
-                    <div class="">
-                        <img src={{ asset('img/Elegant_bloom.png') }} alt="Chic Blossom" class="h-44">
-                        <h2 class="font-bold">Chic Blossom - Bouquet</h2>
-                        <p class="opacity-50">59,99€</p>
-                    </div>
-                    <div class="">
-                        <img src={{ asset('img/Elegant_bloom.png') }} alt="Chic Blossom" class="h-44">
-                        <h2 class="font-bold">Chic Blossom - Bouquet</h2>
-                        <p class="opacity-50">59,99€</p>
-                    </div>
+                <div class="col-start-2 col-end-2">
+                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
+                    <p class="font-bold text-2xl">Flower Orange</p>
+                    <p class="font-bold text-2xl">9,98€</p>
+                </div>
+                <div class="col-start-3 col-end-3">
+                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
+                    <p class="font-bold text-2xl">Flower Orange</p>
+                    <p class="font-bold text-2xl">9,98€</p>
+                </div>
+                <div class="col-start-4 col-end-4">
+                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
+                    <p class="font-bold text-2xl">Flower Orange</p>
+                    <p class="font-bold text-2xl">9,98€</p>
                 </div>
             </div>
         </div>
