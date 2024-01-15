@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MarketplaceController!{% endblock %}
+{% block title %}Marketplace{% endblock %}
 
 {% block body %}
 <div class="bg-white min-h-screen text-black font-poppins">
@@ -18,14 +18,66 @@
             <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4">
             <img src={{ asset('img/Account.svg') }} alt="Search" class="pr-4">
             <div class="flex flex-row">
-                <img src={{ asset('img/Cart.svg') }} alt="Search" class="">
-                <div class="bg-green-500 rounded-full">
-                    <p class="mx-2">2</p>
+                <div class="drawer drawer-end">
+                    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+                    <div class="drawer-content">
+                        <!-- Page content here -->
+                        <label for="my-drawer" class="btn bg-transparent drawer-button border-transparent overflow-hidden hover:bg-white hover:border-transparent shadow-none">
+                            <img src={{ asset('img/Cart.svg') }} alt="Search" class="">
+                            <div class=" text-white h-4">
+                                <p class="mx-2 mt-0 bg-green-500 rounded-full p-2">2</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="drawer-side">
+                        <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+                        <ul class="menu p-4 w-80 min-h-full bg-white">
+                            <!-- Sidebar content here -->
+                            <h1 class="font-semibold text-2xl pb-8 pt-4">Cart</h1>
+                            <div class="flex flex-row justify-between">
+                                <div class="flex flex-row">
+                                    <img src={{ asset('img/flower_orange.jpg') }} alt="Flower Orange" class="w-20 h-24">
+                                    <div class="flex flex-col pl-4">
+                                        <p class="font-bold pb-4 text-sm">Flower Orange</p>
+                                        <p class="text-xs opacity-50">Single</p>
+                                        <div class="flex items-center pt-2">
+                                            <div class="border-transparent bg-slate-100 rounded">
+                                                <button class="pl-2">-</button>
+                                                <button class="px-2">2</button>
+                                                <button class="pr-2">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <p class="font-bold pb-4 text-sm">9,98€</p>
+                                    <img src={{ asset('img/delete.svg') }} alt="Delete" class="h-8 w-8">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex flex-row justify-between pt-8">
+                                    <p class="font-bold text-sm">Subtotal</p>
+                                    <p class="font-bold text-sm">9,98€</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="flex flex-row justify-between">
+                                    <p class="font-bold text-sm">Total</p>
+                                    <p class="font-bold text-sm">9,98€</p>
+                                </div>
+                                <button class="flex flex-row justify-center items-center bg-black text-white rounded-full h-12 w-full mt-8">
+                                    <p class="font-bold text-sm">CHECKOUT</p>
+                                </button>
+                                <div class="flex flex-row justify-center">
+                                    <p class="border-b-2 border-black font-bold pt-4">View Cart</p>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="pt-8 pb-4">
+    <div class=" pb-4">
         <img src={{ asset('img/Hero.png') }} alt="Hero" class="w-full">
     </div>
     <div class="pb-12">

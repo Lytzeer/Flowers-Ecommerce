@@ -9,8 +9,13 @@ module.exports = {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif']
       },
+<<<<<<< HEAD
       colors:{
         secondary: '#38CB89'
+=======
+      colors: {
+        secondary: '#38CB89',
+>>>>>>> front
       },
     },
   },
