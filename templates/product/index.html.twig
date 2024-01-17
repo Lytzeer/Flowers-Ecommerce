@@ -1,21 +1,7 @@
 {% extends 'base.html.twig' %}
-{# {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<div class="example-wrapper">
-    {% for article in articles %}
-        <h2>{{ article.name }}</h2>
-        <p>{{ article.description }}</p>
-        <p>{{ article.price }}</p>
-        <p>{{ article.userPic }}</p>
-        <p>{{ article.authorId }}</p>
-        <a href="/article/{{ article.id }}">show</a>
-        <a href="/article/{{ article.id }}/edit">edit</a>
-        {# <a href="{{ path('app_home', {'article_id':article.id , 'user_id':app.user.id}) }}">add to cartt</a> #}
-    {# {% endfor %} #}
-{% block title %}Flowers Home{% endblock %}
+
+{% block title %}Product{% endblock %}
+
 {% block body %}
 <div class="bg-white min-h-screen text-black font-poppins">
     <div class="navbar">
@@ -48,8 +34,7 @@
                         <ul class="menu p-4 w-80 min-h-full bg-white">
                             <!-- Sidebar content here -->
                             <h1 class="font-semibold text-2xl pb-8 pt-4">Cart</h1>
-                            <p class="text-center pb-8">No articles in cart</p>
-                            {# <div class="flex flex-row justify-between">
+                            <div class="flex flex-row justify-between">
                                 <div class="flex flex-row">
                                     <img src={{ asset('img/flower_orange.jpg') }} alt="Flower Orange" class="w-20 h-24">
                                     <div class="flex flex-col pl-4">
@@ -68,9 +53,9 @@
                                     <p class="font-bold pb-4 text-sm">9,98€</p>
                                     <img src={{ asset('img/delete.svg') }} alt="Delete" class="h-8 w-8">
                                 </div>
-                            </div> #}
-                            {# <div class=""> #}
-                                {# <div class="flex flex-row justify-between pt-8">
+                            </div>
+                            <div class="">
+                                <div class="flex flex-row justify-between pt-8">
                                     <p class="font-bold text-sm">Subtotal</p>
                                     <p class="font-bold text-sm">9,98€</p>
                                 </div>
@@ -81,12 +66,12 @@
                                 </div>
                                 <button class="flex flex-row justify-center items-center bg-black text-white rounded-full h-12 w-full mt-8">
                                     <p class="font-bold text-sm">CHECKOUT</p>
-                                </button> #}
-                                <div class="flex flex-row justify-center">
-                                    <a href={{ path('app_cart') }}>
+                                </button>
+                                <a href={{ path('app_cart') }}>
+                                    <div class="flex flex-row justify-center">
                                         <p class="border-b-2 border-black font-bold pt-4">View Cart</p>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </ul>
                     </div>
@@ -94,82 +79,24 @@
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-2 h-screen">
-        <div class="col-start-1 flex flex-col p-14">
-            <div class="flex flex-col justify-center h-full">
-                <h1 class="text-4xl font-bold">MASTERPIECES FROM</h1>
-                <h1 class="text-4xl font-bold text-secondary">EXQUISITE BLOOMS</h1>
-                <div class="flex flex-col pt-8">
-                    <p>
-                        Since 1990, Flowers has been crafting unique floral arrangements <br>
-                        with a contemporary design, prioritizing an eco-friendly approach. <br>
-                        Explore our floral collection that seamlessly blends modern elegance <br>
-                        with a commitment to nature.
-                    </p>
-                </div>
-                <div class="pt-8 w-11/12">
-                    <a href={{ path('app_marketplace') }}> 
-                        <button class="btn btn-wide text-white" type="">SEE PRODUCTS</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-start-2 pt-8">
-            <img src={{ asset('img/Home.png') }} alt="Flower Home" class=" w-11/12 h-5/6">
-        </div>
-    </div>
-    <div>
-        <h1 class="font-bold text-4xl pl-14">BOUQUET</h1>
-        <div class="px-14">
-            <div class="grid grid-cols-4 pb-14 gap-4">
-                <div class="col-start-1 col-end-1">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-2 col-end-2">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-3 col-end-3">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-4 col-end-4">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-        <h1 class="font-bold text-4xl pl-14">SINGLE</h1>
-        <div class="px-14">
-            <div class="grid grid-cols-4 pb-14 gap-4">
-                <div class="col-start-1 col-end-1">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-2 col-end-2">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-3 col-end-3">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-4 col-end-4">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-            </div>
+    <div class="pl-14 py-24 flex flex-row">
+        <img src={{ asset('img/SideProduct.png') }} alt="Side Product" class="w-1/4 h-1/4">
+        <div class="flex flex-col pl-4">
+            <h1 class="text-4xl font-bold">Opulent</h1>
+            <p class="opacity-50 pt-8">
+                The Opulent Bloom Bouquet is a true celebration of nature's beauty, <br>
+                where each flower is a testament to the artistry of the arrangement. <br>
+                Rich, jewel-toned petals intertwine with verdant foliage, <br>
+                creating a captivating play of colors and textures. <br>
+                The bouquet is expertly handcrafted to ensure a perfect balance of opulence and grace, <br>
+                making it an exquisite gift for any occasion.
+            </p>
+            <p class="text-2xl pt-4">39,99€</p>
+            <div class="divider"></div>
+            <button class="flex flex-row justify-center items-center bg-black text-white rounded-xl h-12 w-full">
+                <p class="font-bold text-sm">ADD TO CART</p>
+            </button>
+            <div class="divider"></div>
         </div>
     </div>
     <div class="relative bottom-0 w-full">
