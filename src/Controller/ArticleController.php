@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
+use App\Entity\Cart;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,10 +46,16 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    public function show(Article $article, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser() != null) {
+            $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+        }
+        $user = $entityManager->getRepository(User::class)->findUserById($this->getUser()->getId());
         return $this->render('article/show.html.twig', [
+            'author' => $user->getUsername(),
             'article' => $article,
+            'cart' => $cart ?? null,
         ]);
     }
 

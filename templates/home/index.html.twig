@@ -1,87 +1,90 @@
 {% extends 'base.html.twig' %}
-{# {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<div class="example-wrapper">
-    {% for article in articles %}
-        <h2>{{ article.name }}</h2>
-        <p>{{ article.description }}</p>
-        <p>{{ article.price }}</p>
-        <p>{{ article.userPic }}</p>
-        <p>{{ article.authorId }}</p>
-        <a href="/article/{{ article.id }}">show</a>
-        <a href="/article/{{ article.id }}/edit">edit</a>
-        {# <a href="{{ path('app_home', {'article_id':article.id , 'user_id':app.user.id}) }}">add to cartt</a> #}
-    {# {% endfor %} #}
-{% block title %}Flowers Home{% endblock %}
+{% block title %}Home{% endblock %}
 {% block body %}
 <div class="bg-white min-h-screen text-black font-poppins">
+    {# Navbar #}
     <div class="navbar">
         <div class="navbar-start">
             <img src={{ asset('img/logo.png') }} alt="Logo" class="w-44">
         </div>
         <div class="navbar-center">
-            <a class="ml-8">Home</a>
-            <a class="ml-8 opacity-50">Shop</a>
-            <a class="ml-8 opacity-50">Marketplace</a>
-            <a class="ml-8 opacity-50">Contact Us</a>
+            <a href={{ path('app_home') }} class="ml-8">Home</a>
+            <a href={{ path('app_marketplace') }} class="ml-8 opacity-50">Marketplace</a>
+            <a href={{ path('app_contact_us') }} class="ml-8 opacity-50">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
             <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4">
-            <img src={{ asset('img/Account.svg') }} alt="Search" class="pr-4">
+            {% if app.user %}
+                <a {#href= path('app_account') #}>
+                    <img src={{ asset('img/Account.svg') }} alt="Account" class="pr-4">
+                </a>   
+            {% else %}
+                <a href={{ path('app_login') }}> 
+                    <button class="btn btn-success text-white" type="">Login</button>
+                </a>
+            {% endif %}
             <div class="flex flex-row">
                 <div class="drawer drawer-end">
                     <input id="my-drawer" type="checkbox" class="drawer-toggle" />
                     <div class="drawer-content">
                         <!-- Page content here -->
+                        {% if app.user %}
                         <label for="my-drawer" class="btn bg-transparent drawer-button border-transparent overflow-hidden hover:bg-white hover:border-transparent shadow-none">
-                            <img src={{ asset('img/Cart.svg') }} alt="Search" class="">
-                            <div class=" text-white h-4">
-                                <p class="mx-2 mt-0 bg-green-500 rounded-full p-2">2</p>
+                            <img src={{ asset('img/Cart.svg') }} alt="Cart">
+                            <div class=" text-white h-full flex justify-center items-center">
+                                    <p class="bg-green-500 rounded-full px-3 py-2 text-black">{{ cart | length }}</p>
                             </div>
                         </label>
+                        {% endif %}
                     </div>
-                    <div class="drawer-side">
+                    <div class="drawer-side z-10">
                         <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
                         <ul class="menu p-4 w-80 min-h-full bg-white">
                             <!-- Sidebar content here -->
                             <h1 class="font-semibold text-2xl pb-8 pt-4">Cart</h1>
-                            <p class="text-center pb-8">No articles in cart</p>
-                            {# <div class="flex flex-row justify-between">
-                                <div class="flex flex-row">
-                                    <img src={{ asset('img/flower_orange.jpg') }} alt="Flower Orange" class="w-20 h-24">
-                                    <div class="flex flex-col pl-4">
-                                        <p class="font-bold pb-4 text-sm">Flower Orange</p>
-                                        <p class="text-xs opacity-50">Single</p>
-                                        <div class="flex items-center pt-2">
-                                            <div class="border-transparent bg-slate-100 rounded">
-                                                <button class="pl-2">-</button>
-                                                <button class="px-2">2</button>
-                                                <button class="pr-2">+</button>
+                            {% set totalprice = 0 %}
+                            {% for article in cart %}
+                            <a href="{{ path('app_article_show', {'id': article.id}) }}">
+                                {# <div>
+                                    <div class="pt-4">
+                                        <div class="flex flex-row">
+                                            <img src={{ article.userPic }} alt={{ article.name }}>
+                                        </div>
+                                        <h2 class="text-2xl font-bold">{{ article.name }}</h2>
+                                        <p>{{ article.price }}€</p>
+                                    </div>
+                                </div> #}
+                                <div class="flex flex-row justify-between">
+                                    <div class="flex flex-row p-4">
+                                        <img src={{ article.userPic }} alt={{ article.name }} class="w-20 h-24">
+                                        <div class="flex flex-col pl-4">
+                                            <p class="font-bold pb-4 text-sm">{{ article.name }}</p>
+                                            <div class="flex items-center pt-2">
+                                                {# <div class="border-transparent bg-slate-100 rounded">
+                                                    <button class="pl-2">-</button>
+                                                    <button class="px-2">2</button>
+                                                    <button class="pr-2">+</button>
+                                                </div> #}
+                                                <p class="font-bold pb-4 text-sm">{{ article.price }}€</p>
+                                                {% set totalprice = totalprice + article.price %}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex flex-col items-end">
-                                    <p class="font-bold pb-4 text-sm">9,98€</p>
-                                    <img src={{ asset('img/delete.svg') }} alt="Delete" class="h-8 w-8">
-                                </div>
-                            </div> #}
-                            {# <div class=""> #}
-                                {# <div class="flex flex-row justify-between pt-8">
-                                    <p class="font-bold text-sm">Subtotal</p>
-                                    <p class="font-bold text-sm">9,98€</p>
-                                </div>
+                            </a>
+                            {% else %}
+                                <p class="text-center pb-8">No articles in cart</p>
+                            {% endfor %}
+                                {% if articles %}
                                 <div class="divider"></div>
                                 <div class="flex flex-row justify-between">
                                     <p class="font-bold text-sm">Total</p>
-                                    <p class="font-bold text-sm">9,98€</p>
+                                    <p class="font-bold text-sm">{{ totalprice }}€</p>
                                 </div>
                                 <button class="flex flex-row justify-center items-center bg-black text-white rounded-full h-12 w-full mt-8">
                                     <p class="font-bold text-sm">CHECKOUT</p>
-                                </button> #}
+                                </button>
+                                {% endif %}
                                 <div class="flex flex-row justify-center">
                                     <a href={{ path('app_cart') }}>
                                         <p class="border-b-2 border-black font-bold pt-4">View Cart</p>
@@ -93,7 +96,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {# End Navbar #}
     <div class="grid grid-cols-2 h-screen">
         <div class="col-start-1 flex flex-col p-14">
             <div class="flex flex-col justify-center h-full">
@@ -119,86 +122,29 @@
         </div>
     </div>
     <div>
-        <h1 class="font-bold text-4xl pl-14">BOUQUET</h1>
+        <h1 class="font-bold text-4xl pl-14">LAST BOUQUET</h1>
         <div class="px-14">
             <div class="grid grid-cols-4 pb-14 gap-4">
-                <div class="col-start-1 col-end-1">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-2 col-end-2">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-3 col-end-3">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-4 col-end-4">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
+               {% for article in articles %}
+                <a href="{{ path('app_article_show', {'id': article.id}) }}">
+                    <div>
+                        <div class="pt-4">
+                            <div class="flex flex-row">
+                                <img src={{ article.userPic }} alt={{ article.name }}>
+                            </div>
+                            <h2 class="text-2xl font-bold">{{ article.name }}</h2>
+                            <p>{{ article.price }}€</p>
+                        </div>
+                    </div>
+                </a>
+                {% else %}
+                    <tr>
+                        <td colspan="8">No articles found</td>
+                    </tr>
+                {% endfor %}
             </div>
         </div>
     </div>
-    <div>
-        <h1 class="font-bold text-4xl pl-14">SINGLE</h1>
-        <div class="px-14">
-            <div class="grid grid-cols-4 pb-14 gap-4">
-                <div class="col-start-1 col-end-1">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-2 col-end-2">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-3 col-end-3">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-                <div class="col-start-4 col-end-4">
-                    <img src={{ asset('img/Elegant_bloom.png') }} alt="Elegant Bloom">
-                    <p class="font-bold text-2xl">Flower Orange</p>
-                    <p class="font-bold text-2xl">9,98€</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="relative bottom-0 w-full">
-        <div class="topfooter bg-black text-white flex flex-row items-center justify-between border-b-2 border-gray-400 pt-16">
-            <div class="flex flex-row items-center mb-4">
-                <img src={{ asset('img/logo_no_background.png') }} alt="Logo" class="w-44">
-                <div class="border-l-2 border-gray-400">
-                    <p class="ml-4">Buy flowers</p>
-                </div>
-            </div>
-            <div class="flex pr-8">
-                <a class="ml-8">Home</a>
-                <a class="ml-8">Shop</a>
-                <a class="ml-8">Product</a>
-                <a class="ml-8">Contact Us</a>
-            </div>
-        </div>
-        <div class="botfooter bg-black text-white flex flex-row items-center justify-between pb-16 pt-2">
-            <div class="flex flex-row items-center">
-                <a class="ml-8">Copyright © 2023 Flowers. All rights reserved</a>
-                <a class="ml-8">Privacy Policy</a>
-                <a class="ml-8">Terms of Use</a>
-            </div>
-            <div class="flex pr-8">
-                <img src={{ asset('img/instagram.svg') }} alt="Instagram" class="pr-4">
-                <img src={{ asset('img/youtube.svg') }} alt="Youtube" class="pr-4">
-                <img src={{ asset('img/facebook.svg') }} alt="Facebook" class="pr-4">
-            </div>
-        </div>
-    </div>
+    {% include '/_defaults/_footer.html.twig' %}
 </div>
 {% endblock %}

@@ -1,46 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title %}Product{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ article.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ article.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ article.price }}</td>
-            </tr>
-            <tr>
-                <th>User_pic</th>
-                <td>{{ article.userPic }}</td>
-            </tr>
-            <tr>
-                <th>Pub_date</th>
-                <td>{{ article.pubDate ? article.pubDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Author_id</th>
-                <td>{{ article.authorId }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_article_index') }}">back to list</a>
-
-    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-
-    {{ include('article/_delete_form.html.twig') }}
+<div class="bg-white min-h-screen text-black font-poppins">
+    {% include '/_defaults/_navbar.html.twig' %}
+    <div class="pl-14 py-24 flex flex-row">
+        <img src={{ article.userPic }} alt="{{ article.name }}" class="w-1/4 h-1/4">
+        <div class="flex flex-col pl-4">
+            <h1 class="text-4xl font-bold">{{ article.name }}</h1>
+            <p>{{ article.pubDate ? article.pubDate|date('Y-m-d') : '' }}</p>
+            <p>{{ author }}</p>
+            <p class="opacity-50 pt-8">
+                {{ article.description }}
+            </p>
+            <p class="text-2xl pt-4">{{ article.price }}€</p>
+            <div class="divider"></div>
+            <button class="flex flex-row justify-center items-center bg-black text-white rounded-xl h-12 w-full">
+                <p class="font-bold text-sm">ADD TO CART</p>
+            </button>
+            <div class="divider"></div>
+        </div>
+    </div>
+    {% include '/_defaults/_footer.html.twig' %}
+</div>
 {% endblock %}

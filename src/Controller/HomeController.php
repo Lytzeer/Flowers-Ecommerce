@@ -14,23 +14,17 @@ use Doctrine\DBAL\Connection;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home', methods: ['GET', 'POST'])]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-
-        if ($request->query->get('user_id')) {
-            $cart = new Cart();
-            $cart->setUserId($request->query->get('user_id'));
-            $cart->setArticleId($request->query->get('article_id'));
-    
-            $entityManager->persist($cart);
-            $entityManager->flush();
+        $articles = $entityManager->getRepository(Article::class)->findLatestArticles();
+        if ($this->getUser() != null) {
+            $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
         }
-
-        $articles = $entityManager->getRepository(Article::class)->findAll();
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'articles' => $articles,
+            'cart' => $cart ?? null,
         ]);
     }
 }

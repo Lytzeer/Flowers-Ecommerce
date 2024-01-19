@@ -26,13 +26,20 @@ class CartController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $cart = new Cart();
-        $cart->setUserId($request->query->get('user_id'));
-        $cart->setArticleId($request->query->get('article_id'));
+        $form = $this->createForm(CartType::class, $cart);
+        $form->handleRequest($request);
 
-        $entityManager->persist($cart);
-        $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($cart);
+            $entityManager->flush();
 
-        return $this->render('home/index.html.twig');
+            return $this->redirectToRoute('app_cart_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('cart/new.html.twig', [
+            'cart' => $cart,
+            'form' => $form,
+        ]);
     }
 
     #[Route('/{id}', name: 'app_cart_show', methods: ['GET'])]

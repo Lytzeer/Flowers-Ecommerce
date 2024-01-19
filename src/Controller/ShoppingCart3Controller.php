@@ -11,6 +11,9 @@ class ShoppingCart3Controller extends AbstractController
     #[Route('/cart3', name: 'app_shopping_cart3')]
     public function index(): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
         return $this->render('shopping_cart3/index.html.twig', [
             'controller_name' => 'ShoppingCart3Controller',
         ]);

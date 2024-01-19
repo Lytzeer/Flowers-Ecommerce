@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Cart;
+use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,6 +21,24 @@ class CartRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Cart::class);
     }
+    
+    /**
+     * @return Article[] Returns an array of Article objects for the given user ID
+     */
+    public function findAllArticlesByUserId($userId): array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('a')
+            ->leftJoin(Article::class, 'a', 'WITH', 'a.id = c.articleId')
+            ->andWhere('c.userId = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+
 
 //    /**
 //     * @return Cart[] Returns an array of Cart objects

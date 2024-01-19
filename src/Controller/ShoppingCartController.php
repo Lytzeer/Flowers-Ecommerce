@@ -8,9 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ShoppingCartController extends AbstractController
 {
-    #[Route('/cart', name: 'app_cart')]
+    #[Route('/cart1', name: 'app_cart')]
     public function index(): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
         return $this->render('shopping_cart/index.html.twig', [
             'controller_name' => 'ShoppingCartController',
         ]);

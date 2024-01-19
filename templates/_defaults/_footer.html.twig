@@ -1,0 +1,29 @@
+    {# Footer #}
+    <div class="relative bottom-0 w-full">
+        <div class="topfooter bg-black text-white flex flex-row items-center justify-between border-b-2 border-gray-400 pt-16 px-4">
+            <div class="flex flex-row items-center mb-4">
+                <img src={{ asset('img/logo_no_background.png') }} alt="Logo" class="w-44">
+                <div class="border-l-2 border-gray-400">
+                    <p class="ml-4">Buy flowers</p>
+                </div>
+            </div>
+            <div class="flex pr-8">
+                <a href={{ path('app_home') }} class="ml-8">Home</a>
+                <a href={{ path('app_marketplace') }} class="ml-8">Marketplace</a>
+                <a href={{ path('app_contact_us') }} class="ml-8">Contact Us</a>
+            </div>
+        </div>
+        <div class="botfooter bg-black text-white flex flex-row items-center justify-between pb-16 pt-2">
+            <div class="flex flex-row items-center">
+                <a class="ml-8">Copyright © 2023 Flowers. All rights reserved</a>
+                <a class="ml-8">Privacy Policy</a>
+                <a class="ml-8">Terms of Use</a>
+            </div>
+            <div class="flex pr-8">
+                <img src={{ asset('img/instagram.svg') }} alt="Instagram" class="pr-4">
+                <img src={{ asset('img/youtube.svg') }} alt="Youtube" class="pr-4">
+                <img src={{ asset('img/facebook.svg') }} alt="Facebook" class="pr-4">
+            </div>
+        </div>
+    </div>
+    {# End Footer #}
