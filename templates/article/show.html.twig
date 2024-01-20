@@ -17,7 +17,9 @@
             <p class="text-2xl pt-4">{{ article.price }}€</p>
             <div class="divider"></div>
             <button class="flex flex-row justify-center items-center bg-black text-white rounded-xl h-12 w-full">
-                <p class="font-bold text-sm">ADD TO CART</p>
+                <a href="{{ path('app_cart_new', {'article_id': article.id}) }}">
+                    <p class="font-bold text-sm">ADD TO CART</p>
+                <a/>
             </button>
             <div class="divider"></div>
         </div>

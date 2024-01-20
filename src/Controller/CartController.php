@@ -26,20 +26,13 @@ class CartController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $cart = new Cart();
-        $form = $this->createForm(CartType::class, $cart);
-        $form->handleRequest($request);
+        $cart->setUserId($this->getUser()->getId());
+        $cart->setArticleId($request->get('article_id'));
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($cart);
-            $entityManager->flush();
+        $entityManager->persist($cart);
+        $entityManager->flush();
 
-            return $this->redirectToRoute('app_cart_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('cart/new.html.twig', [
-            'cart' => $cart,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('app_article_show', ['id' => $request->get('article_id')], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'app_cart_show', methods: ['GET'])]
@@ -68,14 +61,19 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_cart_delete', methods: ['POST'])]
-    public function delete(Request $request, Cart $cart, EntityManagerInterface $entityManager): Response
+    #[Route('/{articleId}', name: 'app_cart_delete', methods: ['POST'])]
+    public function delete(Request $request, CartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$cart->getId(), $request->request->get('_token'))) {
+        $articleId = $request->get('articleId');
+        $userId = $this->getUser()->getId();
+
+        $cart = $cartRepository->findOneBy(['articleId' => $articleId, 'userId' => $userId]);
+
+        if ($cart) {
             $entityManager->remove($cart);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_cart_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_cart', [], Response::HTTP_SEE_OTHER);
     }
 }

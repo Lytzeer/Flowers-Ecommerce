@@ -14,13 +14,11 @@ class ContactUsController extends AbstractController
     #[Route('/contact-us', name: 'app_contact_us')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $articles = $entityManager->getRepository(Article::class)->findLatestArticles();
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
         }
         return $this->render('contact_us/index.html.twig', [
             'controller_name' => 'ContactUsController',
-            'articles' => $articles,
             'cart' => $cart ?? null,
         ]);
     }

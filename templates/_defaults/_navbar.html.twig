@@ -40,34 +40,36 @@
                             <h1 class="font-semibold text-2xl pb-8 pt-4">Cart</h1>
                             {% set totalprice = 0 %}
                             {% for article in cart %}
-                            <a href="{{ path('app_article_show', {'id': article.id}) }}">
-                                {# <div>
-                                    <div class="pt-4">
-                                        <div class="flex flex-row">
-                                            <img src={{ article.userPic }} alt={{ article.name }}>
-                                        </div>
-                                        <h2 class="text-2xl font-bold">{{ article.name }}</h2>
-                                        <p>{{ article.price }}€</p>
-                                    </div>
-                                </div> #}
-                                <div class="flex flex-row justify-between">
-                                    <div class="flex flex-row p-4">
-                                        <img src={{ article.userPic }} alt={{ article.name }} class="w-20 h-24">
-                                        <div class="flex flex-col pl-4">
-                                            <p class="font-bold pb-4 text-sm">{{ article.name }}</p>
-                                            <div class="flex items-center pt-2">
-                                                {# <div class="border-transparent bg-slate-100 rounded">
-                                                    <button class="pl-2">-</button>
-                                                    <button class="px-2">2</button>
-                                                    <button class="pr-2">+</button>
-                                                </div> #}
-                                                <p class="font-bold pb-4 text-sm">{{ article.price }}€</p>
-                                                {% set totalprice = totalprice + article.price %}
+                                {% if article != null %}
+                                    <a href="{{ path('app_article_show', {'id': article.id}) }}">
+                                        {# <div>
+                                            <div class="pt-4">
+                                                <div class="flex flex-row">
+                                                    <img src={{ article.userPic }} alt={{ article.name }}>
+                                                </div>
+                                                <h2 class="text-2xl font-bold">{{ article.name }}</h2>
+                                                <p>{{ article.price }}€</p>
+                                            </div>
+                                        </div> #}
+                                        <div class="flex flex-row justify-between">
+                                            <div class="flex flex-row p-4">
+                                                <img src={{ article.userPic }} alt={{ article.name }} class="w-20 h-24">
+                                                <div class="flex flex-col pl-4">
+                                                    <p class="font-bold pb-4 text-sm">{{ article.name }}</p>
+                                                    <div class="flex items-center pt-2">
+                                                        {# <div class="border-transparent bg-slate-100 rounded">
+                                                            <button class="pl-2">-</button>
+                                                            <button class="px-2">2</button>
+                                                            <button class="pr-2">+</button>
+                                                        </div> #}
+                                                        <p class="font-bold pb-4 text-sm">{{ article.price }}€</p>
+                                                        {% set totalprice = totalprice + article.price %}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </a>
+                                    </a>
+                                {% endif %}
                             {% else %}
                                 <p class="text-center pb-8">No articles in cart</p>
                             {% endfor %}

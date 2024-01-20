@@ -10,7 +10,12 @@
             <h1 class="text-3xl font-bold flex justify-center pt-4">Sell article</h1>
             <div>
             </div>
-            <div class="flex justify-between">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+
+            {# <div class="flex justify-between">
                 <div class="flex flex-col items-center w-full pt-8">
                     <div class="pb-8">
                         <input type="text" placeholder="Name" class="bg-transparent border-b-2 outline-none">
@@ -25,7 +30,7 @@
                         <input type="url" placeholder="Image Link (ex: https://i.ibb.co/3SZPZtF)" class="bg-transparent border-b-2 outline-none">
                     </div>
                 </div>
-            </div>
+            </div> #}
             <div class="flex justify-end pr-36 py-8">
                 <button class="flex flex-row justify-center items-center bg-secondary text-white rounded-xl h-12 px-8">
                     <p class="font-bold text-sm">SUBMIT</p>
