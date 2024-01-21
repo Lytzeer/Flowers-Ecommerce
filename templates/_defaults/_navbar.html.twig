@@ -9,9 +9,9 @@
             <a href={{ path('app_contact_us') }} class="ml-8 opacity-50">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
-            <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4">
+            {# <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4"> #}
             {% if app.user %}
-                <a {#href= path('app_account') #}>
+                <a href= {{ path('app_dashboard')}}>
                     <img src={{ asset('img/Account.svg') }} alt="Account" class="pr-4">
                 </a>   
             {% else %}

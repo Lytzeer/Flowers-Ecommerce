@@ -52,6 +52,7 @@ class ArticleController extends AbstractController
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
         }
         $user = $entityManager->getRepository(User::class)->findUserById($this->getUser()->getId());
+
         return $this->render('article/show.html.twig', [
             'author' => $user->getUsername(),
             'article' => $article,
@@ -62,6 +63,10 @@ class ArticleController extends AbstractController
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser()->getId() !== $article->getAuthorId()) {
+            return $this->redirectToRoute('app_home');
+        }
+        
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
@@ -92,6 +97,6 @@ class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_dashboard', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -5,36 +5,29 @@
 {% block body %}
 <div class="bg-white min-h-screen text-black font-poppins overflow-auto">
     {% include '/_defaults/_navbar.html.twig' %}
-    <div class="p-14">
-        <div class="bg-black rounded-3xl text-white">
-            <h1 class="text-3xl font-bold flex justify-center pt-4">Update article</h1>
-            <div>
-            </div>
-            <div class="flex justify-between">
-                <div class="flex flex-col items-center w-1/2 pt-8">
-                    <div class="pb-8">
-                        <input type="text" placeholder="Name" class="bg-transparent border-b-2 outline-none w-full">
-                    </div>
-                    <div class="pb-8">
-                        <input type="text" placeholder="Description" class="bg-transparent border-b-2 outline-none">
-                    </div>
-                    <div class="pb-8">
-                        <input type="text" placeholder="Price" class="bg-transparent border-b-2 outline-none">
-                    </div>
-                    <div class="pb-8">
-                        <input type="url" placeholder="Image Link" class="bg-transparent border-b-2 outline-none">
-                    </div>
+    <div class="col-start-1 flex flex-col p-14">
+        <div class="flex flex-col justify-center h-full">
+            <h1 class="text-4xl font-bold pb-8">Update Article</h1>
+            <div class="flex flex-col">
+                <div class="pb-8">
+                    <input required type="text" placeholder="Name" class="bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4">
                 </div>
-                <div class="pt-8">
-                    <img src={{ asset('img/SideProduct.png') }} alt="Image" class="h-56 pr-36">
+                <div class="pb-8">
+                    <input required type="text" placeholder="Description" class="bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4">
+                </div>
+                <div class="pb-8">
+                    <input required type="text" placeholder="Price" class="bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4">
+                </div>
+                <div class="pb-8">
+                    <input required type="url" placeholder="Image Link" class="bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4">
                 </div>
             </div>
-            <div class="flex justify-end pr-36 py-8">
-                <button class="flex flex-row justify-center items-center bg-secondary text-white rounded-xl h-12 px-8">
-                    <p class="font-bold text-sm">UPDATE</p>
-                </button>
+            
+            <div class="flex justify-center w-11/12">
+                <a href="{{ path('app_home') }}"> 
+                    <button class="btn btn-wide text-white" type="submit">UPDATE</button>
+                </a>
             </div>
         </div>
-    </div>
 </div>
 {% endblock %}

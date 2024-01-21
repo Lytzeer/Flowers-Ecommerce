@@ -5,38 +5,32 @@
 {% block body %}
 <div class="bg-white min-h-screen text-black font-poppins overflow-auto">
     {% include '/_defaults/_navbar.html.twig' %}
-    <div class="p-14">
-        <div class="bg-black rounded-3xl text-white">
-            <h1 class="text-3xl font-bold flex justify-center pt-4">Sell article</h1>
-            <div>
+    <div class="flex flex-col justify-center h-full p-8">
+        <h1 class="text-4xl font-bold pb-8">Sell</h1>
+
+        {{ form_start(form, {'attr': {'class': 'flex flex-col'}}) }}
+            <div class="pb-8">
+                {{ form_row(form.name, {'attr': {'class': 'ml-4 bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4'}}) }}
             </div>
-            {{ form_start(form) }}
+            <div class="pb-8">
+                {{ form_row(form.description, {'attr': {'class': 'ml-4 bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4'}}) }}
+            </div>
+            <div class="pb-8">
+                {{ form_row(form.price, {'attr': {'class': 'ml-4 bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4'}}) }}
+            </div>
+            <div class="pb-8">
+                {{ form_row(form.user_pic, {'attr': {'class': 'ml-4 bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4'}}) }}
+            </div>
+
+            <div class="flex justify-center w-11/12">
+                <button class="btn btn-wide text-white" type="submit">{{ button_label|default('SUBMIT') }}</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+            {# {{ form_start(form) }}
                 {{ form_widget(form) }}
                 <button class="btn">{{ button_label|default('Save') }}</button>
-            {{ form_end(form) }}
-
-            {# <div class="flex justify-between">
-                <div class="flex flex-col items-center w-full pt-8">
-                    <div class="pb-8">
-                        <input type="text" placeholder="Name" class="bg-transparent border-b-2 outline-none">
-                    </div>
-                    <div class="pb-8">
-                        <input type="text" placeholder="Description" class="bg-transparent border-b-2 outline-none">
-                    </div>
-                    <div class="pb-8">
-                        <input type="text" placeholder="Price (ex: 19,99)" class="bg-transparent border-b-2 outline-none">
-                    </div>
-                    <div class="pb-8">
-                        <input type="url" placeholder="Image Link (ex: https://i.ibb.co/3SZPZtF)" class="bg-transparent border-b-2 outline-none">
-                    </div>
-                </div>
-            </div> #}
-            <div class="flex justify-end pr-36 py-8">
-                <button class="flex flex-row justify-center items-center bg-secondary text-white rounded-xl h-12 px-8">
-                    <p class="font-bold text-sm">SUBMIT</p>
-                </button>
-            </div>
-        </div>
-    </div>
+            {{ form_end(form) }} #}
 </div>
 {% endblock %}

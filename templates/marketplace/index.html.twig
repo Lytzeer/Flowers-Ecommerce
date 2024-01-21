@@ -15,9 +15,9 @@
             <a href={{ path('app_contact_us') }} class="ml-8 opacity-50">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
-            <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4">
+            {# <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4"> #}
             {% if app.user %}
-                <a {#href= path('app_account') #}>
+                <a href= {{ path('app_dashboard')}}>
                     <img src={{ asset('img/Account.svg') }} alt="Account" class="pr-4">
                 </a>   
             {% else %}
@@ -104,13 +104,13 @@
     </div>
     <div>
         <div class="flex flex-col">
-            <div class="flex flex-row justify-evenly pb-4">
+            <div class="flex flex-wrap justify-evenly pb-4">
                 {% for article in articles %}
                 <a href="{{ path('app_article_show', {'id': article.id}) }}">
-                    <div>
+                    <div class="m-2">
                         <div class="pt-4">
-                            <div class="flex flex-row">
-                                <img src={{ article.userPic }} alt={{ article.name }}>
+                            <div class="flex">
+                                <img src={{ article.userPic }} alt={{ article.name }} class="w-78 h-96">
                             </div>
                             <h2 class="text-2xl font-bold">{{ article.name }}</h2>
                             <p>{{ article.price }}€</p>
