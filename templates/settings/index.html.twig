@@ -17,13 +17,19 @@
           <img src={{ asset('img/settings.png') }}>
           <a class="font-bold pl-5">Settings</a>
         </button>
+        <a href={{ path('admin') }}>
+           <button class="bg-red-400 h-20 items-center pl-14 w-full flex">
+                <img src={{ asset('img/settings.png') }}>
+                <p class="pl-5">Admin</p>
+            </button>
+        </a>
     </div>
     <div class="px-20 w-full">
         <div class="flex w-full justify-between">
-        <a class="text-3xl font-bold">Settings</a>
-        <a href={{ path('app_logout') }}>
-            <button class="bg-red-400 text-black w-36 h-10 rounded-lg text-lg">Logout</button>
-        </a>
+            <a class="text-3xl font-bold">Settings</a>
+            <a href={{ path('app_logout') }} class="pb-4">
+                <button class="bg-red-400 text-black w-36 h-10 rounded-lg text-lg">Logout</button>
+            </a>
       </div>
         <div class="border-2 h-fit border-black rounded-lg mt-8 flex">
             <div class="ml-14 mr-28 w-1/2">

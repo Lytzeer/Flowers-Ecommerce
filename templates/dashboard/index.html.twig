@@ -17,13 +17,19 @@
                 <p class="pl-5">Settings</p>
             </button>
         </a>
+        <a href={{ path('admin') }}>
+           <button class="bg-red-400 h-20 items-center pl-14 w-full flex">
+                <img src={{ asset('img/settings.png') }}>
+                <p class="pl-5">Admin</p>
+            </button>
+        </a>
     </div>
     <div class="px-20 w-full">
       <div class="flex w-full justify-between">
         <a class="text-3xl font-bold">Dashboard</a>
-        <a href={{ path('app_sell') }}>
+          <a href={{ path('app_sell') }}>
             <button class="bg-green-400 text-white w-36 h-10 rounded-lg text-lg">Add new</button>
-        </a>
+          </a>
       </div>
       {% for article in articles %}
         <div class="bg-black text-white h-12 flex rounded-xl items-center mt-12">
