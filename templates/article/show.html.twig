@@ -5,23 +5,121 @@
 {% block body %}
 <div class="bg-white min-h-screen text-black font-poppins">
     {% include '/_defaults/_navbar.html.twig' %}
-    <div class="pl-14 py-24 flex flex-row">
-        <img src={{ article.userPic }} alt="{{ article.name }}" class="w-1/4 h-1/4">
-        <div class="flex flex-col pl-4">
-            <h1 class="text-4xl font-bold">{{ article.name }}</h1>
-            <p>{{ article.pubDate ? article.pubDate|date('Y-m-d') : '' }}</p>
-            <p>{{ author }}</p>
-            <p class="opacity-50 pt-8">
-                {{ article.description }}
-            </p>
-            <p class="text-2xl pt-4">{{ article.price }}€</p>
-            <div class="divider"></div>
-            <button class="flex flex-row justify-center items-center bg-black text-white rounded-xl h-12 w-full">
-                <a href="{{ path('app_cart_new', {'article_id': article.id}) }}">
-                    <p class="font-bold text-sm">ADD TO CART</p>
-                <a/>
-            </button>
-            <div class="divider"></div>
+    <div class="flex mx-10 mt-8 justify-center">
+        <div class="">
+            <img src={{ article.userPic }} alt="{{ article.name }}" class="w-96 object-cover h-96">
+        </div>
+        <div class="w-1/3">
+            <div class="flex flex-col pl-4 w-3/4">
+                <div class="flex mb-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+                    <p class="text-xs">11 Reviews</p>
+                </div>
+                <h1 class="text-4xl font-bold">{{ article.name }}</h1>
+                <p class="opacity-50 pt-6">
+                    {{ article.description }}
+                </p>
+                <p class="text-2xl mt-4">{{ article.price }}€</p>
+                <p>by {{ author }} on {{ article.pubDate ? article.pubDate|date('Y-m-d') : '' }}</p>
+                <div class="divider"></div>
+                <div>
+                <p class="font-bold">Stocks</p>
+                <p class="pt-1">129 left</p>
+                <div class="flex mt-9">
+                    <div class="flex bg-gray-100 rounded-md justify-center mr-7 px-4 h-9 items-center">
+                        <button>-</button>
+                        <p class="mx-6">1</p>
+                        <button>+</button>
+                    </div>
+                    <div class="flex">
+                        <button class="border border-black rounded-md h-9 flex items-center px-24">
+                            <img src={{ asset("img/heart.svg")}} alt="heart" class="mr-2">WHISHLIST
+                        </button>
+                    </div>
+                </div>
+                </div>
+                    <button class="flex flex-row justify-center items-center bg-black text-white rounded-xl h-12 w-full mt-5">
+                        <a href="{{ path('app_cart_new', {'article_id': article.id}) }}">
+                            <p class="font-bold text-sm">ADD TO CART</p>
+                        <a/>
+                    </button>
+                {# <div class="divider"></div> #}
+            </div>
+        </div>
+    </div>
+    <div class="px-60 pt-20">
+        <p>Reviews</p>
+        <div class="divider"></div>
+        <p class="font-bold text-xl mt-12">Customer Reviews</p>
+        <div class="flex mb-1 mt-6">
+            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+            <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+            <p class="text-xs">11 Reviews</p>
+            {# <button class="border w-20 pr-44">Newest</button> #}
+        </div>
+        <div class="flex mt-3">
+            <p>Review</p>
+            <h2 class="font-bold ml-2">{{ article.name }}</h2>
+        </div>
+        <div class="mt-6 border-2 rounded-lg h-20 flex justify-end items-center">
+            <input class="focus:outline-none w-full mx-6">
+            <button class="bg-black text-white rounded-lg px-7 h-10 mr-5 flex items-center w-52 justify-center">Write Review</button>
+        </div>
+        <p class="text-3xl mt-12">11 Reviews</p>
+        <div class="flex mt-10">
+            <div class="flex items-start">
+                <img src="{{ asset("img/avatar_review.svg")}}" alt="avatar">
+            </div>
+            <div class="ml-12">
+                <p class="font-black text-lg">Ratio Mael</p>
+                <div class="flex mb-1 mt-4">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+                </div>
+                <p class="mt-4 opacity-90">I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.</p>
+                <p class="mt-5 text-xs">about 1 hour ago</p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="flex mt-10">
+            <div class="flex items-start">
+                <img src="{{ asset("img/avatar_review.svg")}}" alt="avatar">
+            </div>
+            <div class="ml-12">
+                <p class="font-black text-lg">Ratio Mael</p>
+                <div class="flex mb-1 mt-4">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+                </div>
+                <p class="mt-4 opacity-90">I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.</p>
+                <p class="mt-5 text-xs">about 1 hour ago</p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="flex justify-center align-middle">
+            <button class="border border-black rounded-lg px-9 py-2">Load more</button>
+        </div>
+    </div>
+        <div class="w-full flex-col flex justify-center items-center mt-20 bg-[url('https://i.imgur.com/ousswBn.png')] bg-cover h-96">
+        <h2 class="font-bold text-5xl mb-4">JOIN OUR NEWSLETTER</h2>
+        <p class="mb-9 text-xl">Sign up for dexals, new products and promotions</p>
+        <div class="flex flex-row border-b border-gray-400 pb-2 items-center">
+            <img src={{ asset("img/mail.svg")}} alt="mail icon" class="h-7 w-7 mr-3 ">
+            <input placeholder="Email address" class="focus:outline-none w-96">
+            <button class="bg-black text-white w-28 h-10 rounded-lg">Sign Up</button>
         </div>
     </div>
     {% include '/_defaults/_footer.html.twig' %}
