@@ -1,12 +1,15 @@
+
+3.8 KiB
+Raw
+Blame
+History
 {% extends 'base.html.twig' %}
-
 {% block title %}Settings{% endblock %}
-
 {% block body %}
-<div class="bg-white h-screen text-black font-poppins overflow-auto">
+<div class="bg-white min-h-screen text-black font-poppins overflow-auto">
     {% include '/_defaults/_navbar.html.twig' %}
-    <div class="flex mt-6 h-fit">
-    <div class="w-2/12 border-r-2 border-black h-full">
+    <div class="flex h-4/5 mt-6">
+    <div class="w-2/12 border-r-2 border-black">
         <a href={{ path('app_dashboard') }}>
             <button class="h-20 w-full items-center pl-14 flex">
                 <img src={{ asset('img/maison.png') }}>
@@ -17,20 +20,19 @@
           <img src={{ asset('img/settings.png') }}>
           <a class="font-bold pl-5">Settings</a>
         </button>
-        {# <div class="flex justify-center items-end h-full">
-            <a href={{ path('app_logout') }}>
-                <button class="bg-red-400 text-black w-36 h-10 rounded-lg text-lg">Logout</button>
-            </a>
-        </div> #}
-        <div class="flex align-bottom">
-            <button class="bg-red-400 h-20 items-center w-full flex justify-center">
-            <a class="font-bold">Log out</a>
+        <a href={{ path('admin') }}>
+           <button class="bg-red-400 h-20 items-center pl-14 w-full flex">
+                <img src={{ asset('img/settings.png') }}>
+                <p class="pl-5">Admin</p>
             </button>
-        </div>
+        </a>
     </div>
     <div class="px-20 w-full">
         <div class="flex w-full justify-between">
-        <a class="text-3xl font-bold">Settings</a>
+            <a class="text-3xl font-bold">Settings</a>
+            <a href={{ path('app_logout') }} class="pb-4">
+                <button class="bg-red-400 text-black w-36 h-10 rounded-lg text-lg">Logout</button>
+            </a>
       </div>
         <div class="border-2 h-fit border-black rounded-lg mt-8 flex">
             <div class="ml-14 mr-28 w-1/2">
