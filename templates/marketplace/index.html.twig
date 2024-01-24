@@ -104,7 +104,7 @@
         </div>
     {# End Navbar #}
     <div class=" pb-4">
-        <img src={{ asset('img/Hero.png') }} alt="Hero" class="w-full">
+        {# <img src={{ asset('img/Hero.png') }} alt="Hero" class="w-full"> #}
     </div>
     <div>
         <div class="flex flex-col">
@@ -114,7 +114,7 @@
                     <div class="m-2">
                         <div class="pt-4">
                             <div class="flex">
-                                <img src={{ article.userPic }} alt={{ article.name }} class="w-78 h-96">
+                                <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover">
                             </div>
                             <h2 class="text-2xl font-bold">{{ article.name }}</h2>
                             <p>{{ article.price }}€</p>
@@ -127,6 +127,15 @@
                     </tr>
                 {% endfor %}
         </div>
+    <div class="w-full flex-col flex justify-center items-center mt-20 bg-[url('https://i.imgur.com/ousswBn.png')] bg-cover h-96">
+        <h2 class="font-bold text-5xl mb-4">JOIN OUR NEWSLETTER</h2>
+        <p class="mb-9 text-xl">Sign up for deals, new products and promotions</p>
+        <div class="flex flex-row border-b border-gray-400 pb-2 items-center">
+            <img src={{ asset("img/mail.svg")}} alt="mail icon" class="h-7 w-7 mr-3 ">
+            <input placeholder="Email address" class="focus:outline-none w-96">
+            <button class="bg-black text-white w-28 h-10 rounded-lg">Sign Up</button>
+        </div>
+    </div>
     </div>
     {% include '/_defaults/_footer.html.twig' %}
 </div>
