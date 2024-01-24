@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Settings{% endblock %}
-
 {% block body %}
 <div class="bg-white min-h-screen text-black font-poppins overflow-auto">
     {% include '/_defaults/_navbar.html.twig' %}
-    <div class="flex h-4/5">
+    <div class="flex h-4/5 mt-6">
     <div class="w-2/12 border-r-2 border-black">
         <a href={{ path('app_dashboard') }}>
             <button class="h-20 w-full items-center pl-14 flex">
@@ -17,31 +15,35 @@
           <img src={{ asset('img/settings.png') }}>
           <a class="font-bold pl-5">Settings</a>
         </button>
+        <a href={{ path('admin') }}>
+           <button class="bg-red-400 h-20 items-center pl-14 w-full flex">
+                <img src={{ asset('img/settings.png') }}>
+                <p class="pl-5">Admin</p>
+            </button>
+        </a>
     </div>
     <div class="px-20 w-full">
         <div class="flex w-full justify-between">
-        <a class="text-3xl font-bold">Settings</a>
-        <a href={{ path('app_logout') }}>
-            <button class="bg-red-400 text-black w-36 h-10 rounded-lg text-lg">Logout</button>
-        </a>
+            <a class="text-3xl font-bold">Settings</a>
+            <a href={{ path('app_logout') }} class="pb-4">
+                <button class="bg-red-400 text-black w-36 h-10 rounded-lg text-lg">Logout</button>
+            </a>
       </div>
         <div class="border-2 h-fit border-black rounded-lg mt-8 flex">
             <div class="ml-14 mr-28 w-1/2">
                 <div class="flex justify-between mt-5">
                     <a class="font-bold">Username</a>
-                    <button></button>
                 </div>
                 <div class="bg-gray-100 my-6 rounded-lg h-16 items-center flex">
-                    <a class="ml-7">{{ user.username }}</a>
+                    <input class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="{{ user.username }}">
                 </div>
             </div>
             <div class="ml-28 mr-14 w-1/2">
                 <div class="flex justify-between mt-5">
                     <a class="font-bold">E-mail</a>
-                    <button>Edit</button>
                 </div>
                 <div class="bg-gray-100 my-6 rounded-lg h-16 items-center flex">
-                    <a class="ml-7">{{ user.email }}</a>
+                    <input class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="{{ user.email }}">
                 </div>
             </div>
         </div>
@@ -49,19 +51,17 @@
             <div class="ml-14 mr-28 w-1/2">
                 <div class="flex justify-between mt-5">
                     <a class="font-bold">Password</a>
-                    <button></button>
                 </div>
                 <div class="bg-gray-100 my-6 rounded-lg h-16 items-center flex">
-                    <a class="ml-7">*************</a>
+                    <input class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="*************">
                 </div>
             </div>
             <div class="ml-28 mr-14 w-1/2">
                 <div class="flex justify-between mt-5">
                     <a class="font-bold">Confirm password</a>
-                    <button>Edit</button>
                 </div>
                 <div class="bg-gray-100 my-6 rounded-lg h-16 items-center flex">
-                    <a class="ml-7">*************</a>
+                    <input class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="*************">
                 </div>
             </div>
         </div>

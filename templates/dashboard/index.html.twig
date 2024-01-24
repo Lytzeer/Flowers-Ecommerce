@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Dashboard{% endblock %}
-
 {% block body %}
 <div class="bg-white min-h-screen text-black font-poppins overflow-auto">
     {% include '/_defaults/_navbar.html.twig' %}
-      <div class="flex h-4/5">
+    <div class="flex h-4/5 mt-6">
     <div class="w-2/12 border-r-2 border-black">
       <button class="bg-gray-100 h-20 w-full items-center pl-14 flex">
         <img src={{ asset('img/maison.png') }}>
@@ -17,13 +15,19 @@
                 <p class="pl-5">Settings</p>
             </button>
         </a>
+        <a href={{ path('admin') }}>
+           <button class="bg-red-400 h-20 items-center pl-14 w-full flex">
+                <img src={{ asset('img/settings.png') }}>
+                <p class="pl-5">Admin</p>
+            </button>
+        </a>
     </div>
     <div class="px-20 w-full">
       <div class="flex w-full justify-between">
         <a class="text-3xl font-bold">Dashboard</a>
-        <a href={{ path('app_sell') }}>
+          <a href={{ path('app_sell') }}>
             <button class="bg-green-400 text-white w-36 h-10 rounded-lg text-lg">Add new</button>
-        </a>
+          </a>
       </div>
       {% for article in articles %}
         <div class="bg-black text-white h-12 flex rounded-xl items-center mt-12">
