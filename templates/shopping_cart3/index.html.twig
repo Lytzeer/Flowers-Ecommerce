@@ -3,29 +3,9 @@
 {% block title %}Cart{% endblock %}
 
 {% block body %}
-    <div class="bg-white min-h-screen text-black font-poppins overflow-auto">
-        <div class="navbar">
-            <div class="navbar-start">
-                <img src={{ asset('img/logo.png') }} alt="Logo" class="w-44">
-            </div>
-            <div class="navbar-center">
-                <a class="ml-8 opacity-50">Home</a>
-                <a class="ml-8">Shop</a>
-                <a class="ml-8 opacity-50">Product</a>
-                <a class="ml-8 opacity-50">Contact Us</a>
-            </div>
-            <div class="navbar-end pr-8">
-                <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4">
-                <img src={{ asset('img/Account.svg') }} alt="Search" class="pr-4">
-                <div class="flex flex-row">
-                    <img src={{ asset('img/Cart.svg') }} alt="Search" class="">
-                    <div class="bg-green-500 rounded-full">
-                        <p class="mx-2">2</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="px-16 py-14">
+    <div class="bg-white max-h-screen text-black font-poppins overflow-auto">
+        {% include '/_defaults/_navbar.html.twig' %}
+        <div class="px-16 py-10">
             <div class="text-sm breadcrumbs">
                 <ul>
                     <li class="opacity-50"><a href={{ path('app_home') }}>Home</a></li> 
@@ -88,34 +68,6 @@
                 <button class="flex flex-row justify-center items-center bg-black text-white rounded-xl h-12 w-full">
                     <p class="font-bold text-sm">DOWNLOAD INVOICE</p>
                 </button>
-            </div>
-        </div>
-        <div class="relative bottom-0 w-full">
-            <div class="topfooter bg-black text-white flex flex-row items-center justify-between border-b-2 border-gray-400 pt-16">
-                <div class="flex flex-row items-center mb-4">
-                    <img src={{ asset('img/logo_no_background.png') }} alt="Logo" class="w-44">
-                    <div class="border-l-2 border-gray-400">
-                        <p class="ml-4">Buy flowers</p>
-                    </div>
-                </div>
-                <div class="flex pr-8">
-                    <a class="ml-8">Home</a>
-                    <a class="ml-8">Shop</a>
-                    <a class="ml-8">Product</a>
-                    <a class="ml-8">Contact Us</a>
-                </div>
-            </div>
-            <div class="botfooter bg-black text-white flex flex-row items-center justify-between pb-16 pt-2">
-                <div class="flex flex-row items-center">
-                    <a class="ml-8">Copyright © 2023 Flowers. All rights reserved</a>
-                    <a class="ml-8">Privacy Policy</a>
-                    <a class="ml-8">Terms of Use</a>
-                </div>
-                <div class="flex pr-8">
-                    <img src={{ asset('img/instagram.svg') }} alt="Instagram" class="pr-4">
-                    <img src={{ asset('img/youtube.svg') }} alt="Youtube" class="pr-4">
-                    <img src={{ asset('img/facebook.svg') }} alt="Facebook" class="pr-4">
-                </div>
             </div>
         </div>
     </div>

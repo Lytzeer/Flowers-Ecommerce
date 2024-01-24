@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Cart;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -33,12 +34,25 @@ class CartRepository extends ServiceEntityRepository
             ->andWhere('c.userId = :userId')
             ->setParameter('userId', $userId)
             ->getQuery()
-            ->getResult()
+            ->getResult(Query::HYDRATE_ARRAY)
         ;
     }
-
-
-
+    
+    /**
+     * Deletes a cart by ID.
+     *
+     * @param int $cartId The ID of the cart to delete
+     * @return void
+     */
+    public function deleteCart($cartId): void
+    {
+        $cart = $this->find($cartId);
+        
+        if ($cart) {
+            $this->_em->remove($cart);
+            $this->_em->flush();
+        }
+    }
 
 //    /**
 //     * @return Cart[] Returns an array of Cart objects

@@ -51,7 +51,7 @@ class ArticleController extends AbstractController
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
         }
-        $user = $entityManager->getRepository(User::class)->findUserById($this->getUser()->getId());
+        $user = $entityManager->getRepository(User::class)->findUserById($article->getAuthorId());
 
         return $this->render('article/show.html.twig', [
             'author' => $user->getUsername(),
