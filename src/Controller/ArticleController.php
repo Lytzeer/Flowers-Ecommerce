@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\User;
 use App\Entity\Cart;
+use App\Entity\Review;
+use App\Form\ReviewType;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,18 +47,36 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]
-    public function show(Article $article, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'app_article_show', methods: ['GET', 'POST'])]
+    public function show(Article $article, EntityManagerInterface $entityManager, Request $request): Response
     {
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
         }
         $user = $entityManager->getRepository(User::class)->findUserById($article->getAuthorId());
+        $reviews = $article->getReviews();
+
+        $review = new Review();
+        $form = $this->createForm(ReviewType::class, $review);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $review->setUser($this->getUser());
+            $review->setArticle($article);
+            $review->setDate(new \DateTime());  
+            $entityManager->persist($review);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_article_show', ['id' => $article->getId()], Response::HTTP_SEE_OTHER);
+        }
 
         return $this->render('article/show.html.twig', [
             'author' => $user->getUsername(),
+            'user' => $this->getUser(),
             'article' => $article,
+            'reviews' => $reviews,
             'cart' => $cart ?? null,
+            'form' => $form,
         ]);
     }
 
@@ -97,6 +117,6 @@ class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_dashboard', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }

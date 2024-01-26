@@ -16,8 +16,8 @@
                     <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
                     <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
                     <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
-                    <p class="text-xs">11 Reviews</p>
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    <p class="text-xs">{{ reviews | length }} Reviews</p>
                 </div>
                 <h1 class="text-4xl font-bold">{{ article.name }}</h1>
                 <p class="opacity-50 pt-6">
@@ -61,57 +61,78 @@
             <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
             <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
             <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
-            <p class="text-xs">11 Reviews</p>
-            {# <button class="border w-20 pr-44">Newest</button> #}
+            <p class="text-xs">{{ reviews | length }} Reviews</p>
         </div>
         <div class="flex mt-3">
             <p>Review</p>
             <h2 class="font-bold ml-2">{{ article.name }}</h2>
         </div>
-        <div class="mt-6 border-2 rounded-lg h-20 flex justify-end items-center">
-            <input class="focus:outline-none w-full mx-6">
+        {# <div class="mt-6 border-2 rounded-lg h-20 flex justify-end items-center">
+        {{ form_start(form) }}
+            {{ form_row(form.stars) }}
+            {{ form_row(form.content) }}
+            <button class="btn">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+            <input class="focus:outline-none bg-white w-full mx-6" placeholder="Review">
             <button class="bg-black text-white rounded-lg px-7 h-10 mr-5 flex items-center w-52 justify-center">Write Review</button>
+        </div> #}
+        <p class="text-xs mt-6">Select a star to rate this product</p>
+        <div class="flex mb-1" id="starRatingContainer">
+            {% set fullStars = form.stars.vars.value %}
+            {% set emptyStars = 5 - fullStars|default(0) %}
+            {% for i in 1..emptyStars %}
+                <img src="{{ asset('img/star_icon_empty.svg') }}" alt="star" class="mr-1 star" data-rating="{{ fullStars | default(0) + i }}">
+            {% endfor %}
         </div>
-        <p class="text-3xl mt-12">11 Reviews</p>
+        {# <form method="{{ form.vars.method }}" action="{{ form.vars.action }}" class="mt-6 border-2 rounded-lg h-20 flex justify-end items-center">
+            <input type="hidden" name="form[stars]" id="starRating" value="{{ form.stars.vars.value }}">
+
+            {{ form_widget(form.content, {'attr': {'class': 'focus:outline-none bg-white w-full mx-6', 'placeholder': 'Review'}}) }}
+            <button type="submit" class="bg-black text-white rounded-lg px-7 h-10 mr-5 flex items-center w-52 justify-center">Write Review</button>
+        </form> #}
+        {{ form_start(form) }}
+        <div class="mt-6 border-2 rounded-lg h-20 flex justify-end items-center">
+            <input type="hidden" name="{{ form.stars.vars.full_name }}" id="starRating" value="{{ form.stars.vars.value }}">
+            {{ form_widget(form.content, {'attr': {'class': 'focus:outline-none bg-white w-full mx-6', 'placeholder': 'Review'}}) }}
+            <button type="submit" class="bg-black text-white rounded-lg px-7 h-10 mr-5 flex items-center w-52 justify-center">{{ button_label|default('Write Review') }}</button>
+        </div>
+        {{ form_end(form) }}
+        <p class="text-3xl mt-12">{{ reviews | length }} Reviews</p>
+        {% for review in reviews  %}
         <div class="flex mt-10">
             <div class="flex items-start">
-                <img src="{{ asset("img/avatar_review.svg")}}" alt="avatar">
+                <img src="{{ asset("img/default-avatar.jpg")}}" class="h-16 m-16 rounded" alt="avatar">
             </div>
-            <div class="ml-12">
-                <p class="font-black text-lg">Ratio Mael</p>
+            <div class="pl-12 w-full">
+                <p class="font-black text-lg">{{ review.user.username }}</p>
                 <div class="flex mb-1 mt-4">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+                    {% for number in range(1, 5) %}
+                        {% if number <= review.stars %}
+                            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                        {% else %}
+                            <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                <p class="mt-4 opacity-90">I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.</p>
-                <p class="mt-5 text-xs">about 1 hour ago</p>
+                <p class="mt-4 opacity-90">{{ review.content }}</p>
+                <div class="flex flex-row justify-between w-full">
+                    <p class="mt-5 text-xs">{{ review.date ? review.date|date('Y-m-d H:i:s') : '' }}</p>
+                    {% if user == review.user %}
+                        <div class="flex justify-end mt-4">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">Edit</button>
+                            <form method="post" action="{{ path('app_review_delete', {'id': review.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ review.id) }}">
+                                <button class="bg-red-500 text-white px-4 py-2 rounded-lg">Delete</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="divider"></div>
-        <div class="flex mt-10">
-            <div class="flex items-start">
-                <img src="{{ asset("img/avatar_review.svg")}}" alt="avatar">
-            </div>
-            <div class="ml-12">
-                <p class="font-black text-lg">Ratio Mael</p>
-                <div class="flex mb-1 mt-4">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
-                </div>
-                <p class="mt-4 opacity-90">I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.</p>
-                <p class="mt-5 text-xs">about 1 hour ago</p>
-            </div>
-        </div>
-        <div class="divider"></div>
-        <div class="flex justify-center align-middle">
-            <button class="border border-black rounded-lg px-9 py-2">Load more</button>
-        </div>
+        {% else %}
+            <p class="mt-10 text-center">No reviews yet</p>
+        {% endfor %}
     </div>
         <div class="w-full flex-col flex justify-center items-center mt-20 bg-[url('https://i.imgur.com/ousswBn.png')] bg-cover h-96">
         <h2 class="font-bold text-5xl mb-4">JOIN OUR NEWSLETTER</h2>
@@ -124,4 +145,27 @@
     </div>
     {% include '/_defaults/_footer.html.twig' %}
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const stars = document.querySelectorAll('.star');
+        const starRatingInput = document.getElementById('review_stars');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                starRatingInput.value = rating;
+                
+                // Mettre à jour l'apparence de toutes les étoiles
+                stars.forEach(star => {
+                    const starRating = star.getAttribute('data-rating');
+                    star.src = starRating <= rating ? "{{ asset('img/star_icon_full.svg') }}" : "{{ asset('img/star_icon_empty.svg') }}";
+                });
+            });
+        });
+    });
+    </script>
 {% endblock %}

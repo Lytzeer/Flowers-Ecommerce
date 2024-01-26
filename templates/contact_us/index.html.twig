@@ -20,7 +20,7 @@
             <div class="w-66 mr-6">
                 <input type="text" placeholder="Search" class="w-32 h-10 border-2 border-black pl-3 rounded-xl focus:outline-none focus:w-80 transition-all">
             </div>  
-            {# <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4"> #}
+            {# <img src={{ asset('img/search.svg') }} alt="Search" cla3ss="pr-4"> #}
             {% if app.user %}
                 <a href= {{ path('app_dashboard')}}>
                     <img src={{ asset('img/Account.svg') }} alt="Account" class="pr-4">
@@ -88,9 +88,11 @@
                                     <p class="font-bold text-sm">Total</p>
                                     <p class="font-bold text-sm">{{ totalprice }}€</p>
                                 </div>
-                                <button class="flex flex-row justify-center items-center bg-black text-white rounded-full h-12 w-full mt-8">
-                                    <p class="font-bold text-sm">CHECKOUT</p>
-                                </button>
+                                <a href="/cart2">
+                                    <button class="flex flex-row justify-center items-center bg-black text-white rounded-full h-12 w-full mt-8">
+                                        <p class="font-bold text-sm">CHECKOUT</p>
+                                    </button>
+                                </a>
                                 {% endif %}
                                 <div class="flex flex-row justify-center">
                                     <a href={{ path('app_cart') }}>
@@ -127,7 +129,7 @@
                 </label>
                 <div class="flex justify-center w-11/12">
                     <a href={{ path('app_home') }}> 
-                        <button class="btn btn-wide text-white" type="submit">SEND MESSAGE</button>
+                        <button class="btn btn-wide text-white bg-black" type="submit">SEND MESSAGE</button>
                     </a>
                 </div>
             </div>
