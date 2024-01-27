@@ -134,15 +134,7 @@
             <p class="mt-10 text-center">No reviews yet</p>
         {% endfor %}
     </div>
-        <div class="w-full flex-col flex justify-center items-center mt-20 bg-[url('https://i.imgur.com/ousswBn.png')] bg-cover h-96">
-        <h2 class="font-bold text-5xl mb-4">JOIN OUR NEWSLETTER</h2>
-        <p class="mb-9 text-xl">Sign up for dexals, new products and promotions</p>
-        <div class="flex flex-row border-b border-gray-400 pb-2 items-center">
-            <img src={{ asset("img/mail.svg")}} alt="mail icon" class="h-7 w-7 mr-3 ">
-            <input placeholder="Email address" class="focus:outline-none w-96">
-            <button class="bg-black text-white w-28 h-10 rounded-lg">Sign Up</button>
-        </div>
-    </div>
+    {% include '/_defaults/_newsletter.html.twig' %}
     {% include '/_defaults/_footer.html.twig' %}
 </div>
 
