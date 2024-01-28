@@ -16,8 +16,8 @@
             </button>
         </a>
         <a href={{ path('admin') }}>
-           <button class="bg-red-400 h-20 items-center pl-14 w-full flex">
-                <img src={{ asset('img/settings.png') }}>
+           <button class="bg-green-400 h-20 items-center pl-14 w-full flex">
+                <img src={{ asset('img/admin_logo.svg') }} class="w-10 h-10">
                 <p class="pl-5">Admin</p>
             </button>
         </a>
@@ -30,8 +30,8 @@
           </a>
       </div>
       {% for article in articles %}
-        <div class="bg-black text-white h-12 flex rounded-xl items-center mt-12">
-        <div class="w-1/2 flex divide-x-2">
+        <div class="bg-white text-black h-fit flex rounded-xl items-center mt-12 overflow-hidden border-2 border-black">
+        <div class="flex divide-x-2 divide-black">
           <a class="px-11 py-1 font-bold flex items-center">{{ article.name }}</a>
           <a class="px-11 py-1 flex items-center">{{ article.price }}€</a>
           {# <a class="px-11 py-1 flex items-center">{{ article.description }}</a> #}
