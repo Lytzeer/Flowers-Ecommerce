@@ -39,64 +39,104 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="mt-12 ml-7">
-                    <p class="font-bold text-lg">Contact Information</p>
-                        <div class="w-2/5">
-                            <div class="mt-5 flex">
-                                <div class="mr-10">
-                                    <p class="mb-2 text-gray-600 text-xs font-black">FIRST NAME *</p>
-                                    <input placeholder="First name" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+            <div class="flex">
+                <div>
+                    <div class="mt-12 ml-7">
+                        <p class="font-bold text-lg">Contact Information</p>
+                            <div class="w-full">
+                                <div class="mt-5 flex">
+                                    <div class="mr-10">
+                                        <p class="mb-2 text-gray-600 text-xs font-black">FIRST NAME *</p>
+                                        <input placeholder="First name" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                    </div>
+                                    <div>
+                                        <p class="mb-2 text-gray-600 text-xs font-black">LAST NAME *</p>
+                                        <input placeholder="Last name" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="mb-2 text-gray-600 text-xs font-black">LAST NAME *</p>
-                                    <input placeholder="Last name" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
-                                </div>
-                            </div>
-                            <div class="mt-6">
-                                <p class="mb-2 text-gray-600 text-xs font-black">PHONE NUMBER</p>
-                                <input placeholder="Phone number" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                            <div class="mt-6">
-                                <p class="mb-2 text-gray-600 text-xs font-black">EMAIL ADDRESS</p>
-                                <input placeholder="Your email" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                        <div>
-                    </div>
-                </div>
-                </div>
-                <div class="mt-12 ml-7">
-                    <p class="font-bold text-lg">Shipping Address</p>
-                        <div class="w-2/5">
-                            <div class="mt-5">
-                                <p class="mb-2 text-gray-600 text-xs font-black">CITY *</p>
-                                <input placeholder="City" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                            <div class="mt-5">
-                                <p class="mb-2 text-gray-600 text-xs font-black">STREET ADDRESS *</p>
-                                <input placeholder="Street address" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                            <div class="mt-5">
-                                <p class="mb-2 text-gray-600 text-xs font-black">ZIP CODE *</p>
-                                <input placeholder="Zip code" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                            <div class="mt-5 flex">
-                                <div class="mr-10">
+                                <div class="mt-6">
                                     <p class="mb-2 text-gray-600 text-xs font-black">PHONE NUMBER</p>
-                                    <input placeholder="Phone number" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                    <input placeholder="Phone number" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
                                 </div>
-                                <div>
-                                    <p class="mb-2 text-gray-600 text-xs font-black">BILLING ADDRESS</p>
-                                    <input placeholder="Billing address" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                <div class="mt-6">
+                                    <p class="mb-2 text-gray-600 text-xs font-black">EMAIL ADDRESS</p>
+                                    <input placeholder="Your email" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
                                 </div>
-                            </div>
-                        <div>
-                    </div>
-                    <a href={{ path('app_stripe_checkout') }}>
-                        <div class="mt-14">
-                            <button class="text-white bg-black rounded-lg w-full h-12">PLACE ORDER</button>
+                            <div>
                         </div>
-                    </a>
+                    </div>
+                    </div>
+                    <div class="mt-12 ml-7">
+                        <p class="font-bold text-lg">Shipping Address</p>
+                            <div class="w-full">
+                                <div class="mt-5">
+                                    <p class="mb-2 text-gray-600 text-xs font-black">CITY *</p>
+                                    <input placeholder="City" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
+                                </div>
+                                <div class="mt-5">
+                                    <p class="mb-2 text-gray-600 text-xs font-black">STREET ADDRESS *</p>
+                                    <input placeholder="Street address" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
+                                </div>
+                                <div class="mt-5">
+                                    <p class="mb-2 text-gray-600 text-xs font-black">ZIP CODE *</p>
+                                    <input placeholder="Zip code" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
+                                </div>
+                                <div class="mt-5 flex">
+                                    <div class="mr-10">
+                                        <p class="mb-2 text-gray-600 text-xs font-black">PHONE NUMBER</p>
+                                        <input placeholder="Phone number" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                    </div>
+                                    <div>
+                                        <p class="mb-2 text-gray-600 text-xs font-black">BILLING ADDRESS</p>
+                                        <input placeholder="Billing address" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                    </div>
+                                </div>
+                            <div>
+                        </div>
+                        <a href={{ path('app_stripe_checkout') }}>
+                            <div class="mt-14">
+                                <button class="text-white bg-black rounded-lg w-full h-12">PLACE ORDER</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-20">
+                <div class="border border-gray-400 rounded-lg px-6 py-2">
+                    <p class="font-bold text-xl my-2">Cart Summary</p>
+                    <div class="flex border border-gray-600 rounded-lg px-3 py-2 mt-3 w-96 justify-between hover:bg-gray-100 hover:border-2">
+                        <div class="flex items-center">
+                            <input type="radio" id="free shipping" class="radio radio-success w-5 h-5 mr-3 checked" name="shipping">
+                            <label for="free shipping">Free shipping</label>
+                        </div>
+                        <p>0,00€</p>
+                    </div>
+                    <div class="flex border border-gray-600 rounded-lg px-3 py-2 mt-3 w-96 justify-between hover:bg-gray-100 hover:border-2">
+                        <div class="flex items-center">
+                            <input type="radio" id="Express shipping" class="radio radio-success w-5 h-5 mr-3 checked" name="shipping">
+                            <label for="Express shipping">Express shipping</label>
+                        </div>
+                        <p>20,00€</p>
+                    </div>
+                    <div class="flex border border-gray-600 rounded-lg px-3 py-2 mt-3 w-96 justify-between hover:bg-gray-100 hover:border-2">
+                        <div class="flex items-center">
+                            <input type="radio" id="Pick up" class="radio radio-success w-5 h-5 mr-3 checked" name="shipping">
+                            <label for="Pick up">Pick up</label>
+                        </div>
+                        <p>15,00€</p>
+                    </div>
+                    <div class="flex justify-between mt-7">
+                        <p>Subtotal</p>
+                        <p>129,95€</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="flex justify-between font-bold text-xl">
+                        <p>Total</p>
+                        <p>134,95€</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="bg-black text-white w-full py-2 rounded-lg mt-8 mb-4 text-lg font-bold">CHECKOUT</button>
+                    </div>
                 </div>
             </div>
             </div>
