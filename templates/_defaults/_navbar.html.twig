@@ -6,9 +6,9 @@
         </a>
         </div>
         <div class="navbar-center">
-            <a href={{ path('app_home') }} class="ml-8 opacity-50">Home</a>
-            <a href={{ path('app_marketplace') }} class="ml-8 opacity-50">Marketplace</a>
-            <a href={{ path('app_contact_us') }} class="ml-8 opacity-50">Contact Us</a>
+            <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Home</a>
+            <a href={{ path('app_marketplace') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Marketplace</a>
+            <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Contact Us</a>
         </div>
 
         <div class="navbar-end pr-8">
@@ -59,7 +59,7 @@
                                         </div> #}
                                         <div class="flex flex-row justify-between">
                                             <div class="flex flex-row p-4">
-                                                <img src={{ article.user_pic }} alt={{ article.name }} class="w-20 h-24">
+                                                <img src={{ article.user_pic }} alt={{ article.name }} class="w-20 h-20 object-cover">
                                                 <div class="flex flex-col pl-4">
                                                     <p class="font-bold pb-4 text-sm">{{ article.name }}</p>
                                                     <div class="flex items-center pt-2">
@@ -85,15 +85,13 @@
                                     <p class="font-bold text-sm">Total</p>
                                     <p class="font-bold text-sm">{{ totalprice }}€</p>
                                 </div>
-                                <a href="/cart2">
-                                    <button class="flex flex-row justify-center items-center bg-black text-white rounded-full h-12 w-full mt-8">
-                                        <p class="font-bold text-sm">CHECKOUT</p>
-                                    </button>
+                               <a href="/cart2">
+                                    <button class="text-white bg-black px-7 py-2  border-black border font-bold rounded-xl hover:bg-white hover:text-black transition-all duration-300 w-full mt-3" type="">CHECKOUT</button>
                                 </a>
                                 {% endif %}
                                 <div class="flex flex-row justify-center">
                                     <a href={{ path('app_cart') }}>
-                                        <p class="border-b-2 border-black font-bold pt-4">View Cart</p>
+                                        <p class="border-black font-bold pt-2 hover:border-b-2">View Cart</p>
                                     </a>
                                 </div>
                             </div>

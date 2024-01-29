@@ -11,9 +11,9 @@
             <img src={{ asset('img/logo.png') }} alt="Logo" class="w-44">
         </a>        </div>
         <div class="navbar-center">
-            <a href={{ path('app_home') }} class="ml-8 opacity-50">Home</a>
-            <a href={{ path('app_marketplace') }} class="ml-8">Marketplace</a>
-            <a href={{ path('app_contact_us') }} class="ml-8 opacity-50">Contact Us</a>
+            <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Home</a>
+            <a href={{ path('app_marketplace') }} class="ml-8 border-b-2 border-black">Marketplace</a>
+            <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
             <div class="w-66 mr-6">
@@ -62,7 +62,7 @@
                                 </div> #}
                                 <div class="flex flex-row justify-between">
                                     <div class="flex flex-row p-4">
-                                        <img src={{ article.user_pic }} alt={{ article.name }} class="w-20 h-24">
+                                        <img src={{ article.user_pic }} alt={{ article.name }} class="w-20 h-20 object-cover">
                                         <div class="flex flex-col pl-4">
                                             <p class="font-bold pb-4 text-sm">{{ article.name }}</p>
                                             <div class="flex items-center pt-2">
@@ -87,15 +87,13 @@
                                     <p class="font-bold text-sm">Total</p>
                                     <p class="font-bold text-sm">{{ totalprice }}€</p>
                                 </div>
-                                <a href="/cart2">
-                                    <button class="flex flex-row justify-center items-center bg-black text-white rounded-full h-12 w-full mt-8">
-                                        <p class="font-bold text-sm">CHECKOUT</p>
-                                    </button>
+                               <a href="/cart2">
+                                    <button class="text-white bg-black px-7 py-2  border-black border font-bold rounded-xl hover:bg-white hover:text-black transition-all duration-300 w-full mt-3" type="">CHECKOUT</button>
                                 </a>
                                 {% endif %}
                                 <div class="flex flex-row justify-center">
                                     <a href={{ path('app_cart') }}>
-                                        <p class="border-b-2 border-black font-bold pt-4">View Cart</p>
+                                        <p class="border-black font-bold pt-2 hover:border-b-2">View Cart</p>
                                     </a>
                                 </div>
                             </div>
@@ -116,7 +114,7 @@
                     <div class="m-2">
                         <div class="pt-4">
                             <div class="flex">
-                                <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover">
+                                <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover hover:opacity-80">
                             </div>
                             <h2 class="text-2xl font-bold">{{ article.name }}</h2>
                             <p>{{ article.price }}€</p>
@@ -129,16 +127,8 @@
                     </tr>
                 {% endfor %}
         </div>
-    <div class="w-full flex-col flex justify-center items-center mt-20 bg-[url('https://i.imgur.com/ousswBn.png')] bg-cover h-96">
-        <h2 class="font-bold text-5xl mb-4">JOIN OUR NEWSLETTER</h2>
-        <p class="mb-9 text-xl">Sign up for deals, new products and promotions</p>
-        <div class="flex flex-row border-b border-gray-400 pb-2 items-center">
-            <img src={{ asset("img/mail.svg")}} alt="mail icon" class="h-7 w-7 mr-3 ">
-            <input placeholder="Email address" class="focus:outline-none w-96">
-            <button class="bg-black text-white w-28 h-10 rounded-lg">Sign Up</button>
-        </div>
     </div>
-    </div>
+    {% include '/_defaults/_newsletter.html.twig' %}
     {% include '/_defaults/_footer.html.twig' %}
 </div>
 {% endblock %}
