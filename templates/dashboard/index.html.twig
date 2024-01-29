@@ -5,18 +5,20 @@
     {% include '/_defaults/_navbar.html.twig' %}
     <div class="flex h-4/5 mt-6">
     <div class="w-2/12 border-r-2 border-black">
-      <button class="bg-gray-100 h-20 w-full items-center pl-14 flex">
-        <img src={{ asset('img/maison.png') }}>
-        <a class="font-bold pl-5">Dashboard</a>
-      </button>
-        <a href={{ path('app_settings') }}>
-            <button class="h-20 items-center pl-14 w-full flex">
-                <img src={{ asset('img/settings.png') }}>
-                <p class="pl-5">Settings</p>
+        <a href={{ path('app_dashboard') }}>
+            <button class="h-20 w-full items-center pl-14 flex">
+                <img src={{ asset('img/maison.png') }}>
+                <p class="pl-5">Dashboard</p>
             </button>
         </a>
+        <a href="/settings">
+          <button class="h-20 w-full items-center pl-14 flex opacity-50 hover:bg-gray-200">
+          <img src={{ asset('img/settings.png') }}>
+          <p class="font-bold pl-5">Settings</p>
+          </button>
+        </a>
         <a href={{ path('admin') }}>
-           <button class="bg-green-400 h-20 items-center pl-14 w-full flex">
+            <button class="h-20 w-full items-center pl-14 flex hover:bg-gray-200 opacity-50">
                 <img src={{ asset('img/admin_logo.svg') }} class="w-10 h-10">
                 <p class="pl-5">Admin</p>
             </button>
@@ -26,7 +28,7 @@
       <div class="flex w-full justify-between">
         <a class="text-3xl font-bold">Dashboard</a>
           <a href={{ path('app_sell') }}>
-            <button class="bg-green-400 text-white w-36 h-10 rounded-lg text-lg">Add new</button>
+            <button class="bg-green-400 text-black w-36 h-10 rounded-lg text-lg hover:bg-green-500">Add new</button>
           </a>
       </div>
       {% for article in articles %}
@@ -41,11 +43,11 @@
         </div>
         <div class="w-1/2 flex justify-end">
             <a href="{{ path('app_article_edit', {'id': article.id}) }}">
-                <button class="bg-green-400 h-8 w-20 rounded-lg">Edit</button>
+                <button class="bg-green-400 h-8 w-20 rounded-lg hover:bg-green-500">Edit</button>
             </a>
             <form method="post" action="{{ path('app_article_delete', {'id': article.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
-                <button class="bg-red-500 h-8 w-20 mx-6 rounded-lg">Delete</button>
+                <button class="bg-red-500 h-8 w-20 mx-6 rounded-lg hover:bg-red-600">Delete</button>
             </form>
         </div>
       </div>
