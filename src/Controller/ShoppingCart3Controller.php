@@ -15,6 +15,16 @@ class ShoppingCart3Controller extends AbstractController
     #[Route('/cart3', name: 'app_shopping_cart3', methods: ['POST', 'GET'])]
     public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
+        $fname = $request->query->get('fname');
+        $lname = $request->query->get('lname');
+        $phone = $request->query->get('phone');
+        $mail = $request->query->get('mail');
+        $city = $request->query->get('city');
+        $address = $request->query->get('address');
+        $postal = $request->query->get('postal');
+
+        dd($fname, $lname, $phone, $mail, $city, $address, $postal);
+
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_home');
         }

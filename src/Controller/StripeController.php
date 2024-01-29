@@ -23,11 +23,19 @@ class StripeController extends AbstractController
     }
 
     #[Route('/checkout', name: 'app_stripe_checkout', methods: ['POST', 'GET'])]
-    public function checkout(EntityManagerInterface $entityManager): Response
+    public function checkout(EntityManagerInterface $entityManager, Request $request): Response
     {
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
         }
+
+        $fname = $request->request->get('fname');
+        $lname = $request->request->get('lname');
+        $phone = $request->request->get('phone');
+        $mail = $request->request->get('mail');
+        $city = $request->request->get('city');
+        $address = $request->request->get('address');
+        $postal = $request->request->get('postal');
 
         Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
 
@@ -50,7 +58,15 @@ class StripeController extends AbstractController
                 $checkout_session['line_items']
             ],
             'mode' => 'payment',
-            'success_url' => $this->generateUrl('app_shopping_cart3', [], 0, 'http://127.0.0.1:8000/cart3'),
+            'success_url' => $this->generateUrl('app_shopping_cart3', [
+                'fname' => $fname,
+                'lname' => $lname,
+                'phone' => $phone,
+                'mail' => $mail,
+                'city' => $city,
+                'address' => $address,
+                'postal' => $postal,
+            ], 0, 'http://127.0.0.1:8000/cart3'),
             'cancel_url' => $this->generateUrl('app_cart', [], 0, 'http://127.0.0.1:8000/cart1'),
           ]);
 

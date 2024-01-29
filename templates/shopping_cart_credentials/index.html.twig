@@ -40,66 +40,89 @@
                 </div>
             </div>
             <div>
-                <div class="mt-12 ml-7">
-                    <p class="font-bold text-lg">Contact Information</p>
-                        <div class="w-2/5">
-                            <div class="mt-5 flex">
-                                <div class="mr-10">
-                                    <p class="mb-2 text-gray-600 text-xs font-black">FIRST NAME *</p>
-                                    <input placeholder="First name" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                <form method="POST" action={{ path('app_stripe_checkout')}}>
+                    <div class="mt-12 ml-7">
+                        <p class="font-bold text-lg">Contact Information</p>
+                            <div class="w-2/5">
+                                <div class="mt-5 flex">
+                                    <div class="mr-10">
+                                        <p class="mb-2 text-gray-600 text-xs font-black">FIRST NAME *</p>
+                                        <input name="fname" required placeholder="First name" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                    </div>
+                                    <div>
+                                        <p class="mb-2 text-gray-600 text-xs font-black">LAST NAME *</p>
+                                        <input name="lname" required placeholder="Last name" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="mb-2 text-gray-600 text-xs font-black">LAST NAME *</p>
-                                    <input placeholder="Last name" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
-                                </div>
-                            </div>
-                            <div class="mt-6">
-                                <p class="mb-2 text-gray-600 text-xs font-black">PHONE NUMBER</p>
-                                <input placeholder="Phone number" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                            <div class="mt-6">
-                                <p class="mb-2 text-gray-600 text-xs font-black">EMAIL ADDRESS</p>
-                                <input placeholder="Your email" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                        <div>
-                    </div>
-                </div>
-                </div>
-                <div class="mt-12 ml-7">
-                    <p class="font-bold text-lg">Shipping Address</p>
-                        <div class="w-2/5">
-                            <div class="mt-5">
-                                <p class="mb-2 text-gray-600 text-xs font-black">CITY *</p>
-                                <input placeholder="City" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                            <div class="mt-5">
-                                <p class="mb-2 text-gray-600 text-xs font-black">STREET ADDRESS *</p>
-                                <input placeholder="Street address" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                            <div class="mt-5">
-                                <p class="mb-2 text-gray-600 text-xs font-black">ZIP CODE *</p>
-                                <input placeholder="Zip code" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
-                            </div>
-                            <div class="mt-5 flex">
-                                <div class="mr-10">
+                                <div class="mt-6">
                                     <p class="mb-2 text-gray-600 text-xs font-black">PHONE NUMBER</p>
-                                    <input placeholder="Phone number" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                    <input name="phone" placeholder="Phone number" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
                                 </div>
-                                <div>
-                                    <p class="mb-2 text-gray-600 text-xs font-black">BILLING ADDRESS</p>
-                                    <input placeholder="Billing address" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-80">
+                                <div class="mt-6">
+                                    <p class="mb-2 text-gray-600 text-xs font-black">EMAIL ADDRESS *</p>
+                                    <input name="mail" required placeholder="Your email" type="mail" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
                                 </div>
-                            </div>
-                        <div>
-                    </div>
-                    <a href={{ path('app_stripe_checkout') }}>
-                        <div class="mt-14">
-                            <button class="text-white bg-black rounded-lg w-full h-12">PLACE ORDER</button>
+                            <div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                    </div>
+                    <div class="mt-12 ml-7">
+                        <p class="font-bold text-lg">Shipping Address</p>
+                            <div class="w-2/5">
+                                <div class="mt-5">
+                                    <p class="mb-2 text-gray-600 text-xs font-black">CITY *</p>
+                                    <input name="city" required placeholder="City" id="localityInput" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
+                                </div>
+                                <div class="mt-5">
+                                    <p class="mb-2 text-gray-600 text-xs font-black">STREET ADDRESS *</p>
+                                    <input name="address" required placeholder="Street address" id="addressInput" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
+                                </div>
+                                <div class="mt-5">
+                                    <p class="mb-2 text-gray-600 text-xs font-black">ZIP CODE *</p>
+                                    <input name="postal" required placeholder="Zip code" id="postalCodeInput" class="border-2 focus:outline-none px-3 rounded-lg py-2 w-full">
+                                </div>
+                            <div>
+                        </div>
+                        <a href={{ path('app_stripe_checkout') }}>
+                            <div class="mt-14">
+                                <button type="submit" class="text-white bg-black rounded-lg w-full h-12">PLACE ORDER</button>
+                            </div>
+                        </a>
+                    </div>
+                </form>
             </div>
             </div>
         </div>
     {% include '/_defaults/_footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqOD1I5-egptHQ7QB5gUk34oqNZ3E7z0w&libraries=places"></script>
+    <script>
+        function searchAddress() {
+            var input = document.getElementById('addressInput');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', function() {
+                var place = autocomplete.getPlace();
+                var address = autocomplete.getPlace()['name'];
+                var postalCode = '';
+                var locality = '';
+                for (var i = 0; i < place.address_components.length; i++) {
+                    var component = place.address_components[i];
+                    if (component.types.includes('postal_code')) {
+                        postalCode = component.long_name;
+                    }
+                    if (component.types.includes('locality')) {
+                        locality = component.long_name;
+                    }
+                }
+                document.getElementById('addressInput').value = address;
+                document.getElementById('postalCodeInput').value = postalCode;
+                document.getElementById('localityInput').value = locality;
+            });
+        }
+
+        // Appeler la fonction de recherche lorsque la page est chargée
+        window.addEventListener('load', searchAddress);
+    </script>
 {% endblock %}
