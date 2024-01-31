@@ -36,13 +36,13 @@
                 <div class="flex justify-center w-11/12">
                     <a href={{ path('app_home') }}>
                         <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
-                        <button class="btn btn-wide text-white" type="submit">SIGN IN</button> 
+                        <button class="text-white bg-black px-20 py-2  border-black border font-bold rounded-xl hover:bg-white hover:text-black transition-all duration-300 w-full mt-3" type="">SIGN IN</button>
                     </a>
                 </div>
             </div>
         </div>
         <div class="col-start-2">
-            <img src="{{ asset('/img/login.png') }}" alt="Login Image" class="w-full h-screen">
+            <img src="{{ asset('/img/login.jpeg') }}" alt="Login Image" class="w-full h-screen objet-cover">
         </div>
     </div>
 </form>

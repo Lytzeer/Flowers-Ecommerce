@@ -135,23 +135,43 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const stars = document.querySelectorAll('.star');
-        const starRatingInput = document.getElementById('review_stars');
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const stars = document.querySelectorAll('.star');
+    const starRatingInput = document.getElementById('review_stars');
+    let userClicked = false;
 
-        stars.forEach(star => {
-            star.addEventListener('click', function() {
+    stars.forEach(star => {
+        star.addEventListener('mouseenter', function() {
+            if (!userClicked) {
                 const rating = this.getAttribute('data-rating');
                 starRatingInput.value = rating;
-                
+
                 // Mettre à jour l'apparence de toutes les étoiles
                 stars.forEach(star => {
                     const starRating = star.getAttribute('data-rating');
                     star.src = starRating <= rating ? "{{ asset('img/star_icon_full.svg') }}" : "{{ asset('img/star_icon_empty.svg') }}";
                 });
+            }
+        });
+
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('data-rating');
+            starRatingInput.value = rating;
+
+            // Set a flag to indicate that the user has clicked
+            userClicked = true;
+
+            // Optionally, you may want to remove 'mouseenter' event listeners after a click
+            stars.forEach(star => {
+                star.removeEventListener('mouseenter');
             });
         });
     });
-    </script>
+});
+</script>
+
+
+
+
 {% endblock %}

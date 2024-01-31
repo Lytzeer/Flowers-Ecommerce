@@ -13,7 +13,7 @@
                 
                 <div class="flex flex-col">
                     <div class="pb-8">
-                        {{ form_widget(registrationForm.username, {'attr': {'type': 'text', 'placeholder': 'Username', 'class': 'bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4'}}) }}
+                        {{ form_widget(registrationForm.username, {'attr': {'type': 'text', 'placeholder': 'Username', 'class': 'bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4', 'autocomplete': 'off'}}) }}
                     </div>
                     <div class="pb-8">
                         {{ form_widget(registrationForm.email, {'attr': {'type': 'text', 'placeholder': 'Email', 'class': 'bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4'}}) }}
@@ -22,7 +22,7 @@
                         {{ form_widget(registrationForm.password, {'attr': {'type': 'password', 'placeholder': 'Password', 'class': 'bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4'}}) }}
                     </div>
                     <div class="pb-8">
-                        <input required type="password" placeholder="Confirm password" class="bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4">
+                        <input required type="password" placeholder="Confirm password" class="bg-transparent border-b-2 border-b-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
                     </div>
                     {{ form_errors(registrationForm) }}
                 </div>
@@ -36,7 +36,7 @@
                 
                 <div class="flex justify-center w-11/12">
                     <a href="{{ path('app_home') }}"> 
-                        <button class="btn btn-wide text-white" type="submit">SIGN UP</button>
+                        <button class="text-white bg-black px-20 py-2  border-black border font-bold rounded-xl hover:bg-white hover:text-black transition-all duration-300 w-full mt-3" type="">SIGN UP</button>
                     </a>
                 </div>
             </div>
@@ -45,7 +45,7 @@
         {{ form_end(registrationForm) }}
         
         <div class="col-start-2">
-            <img src="{{ asset('/img/register.png') }}" alt="Register Image" class="w-full h-screen">
+            <img src="{{ asset('/img/register.jpg') }}" alt="Register Image" class="w-full h-screen object-cover">
         </div>
     </div>
 

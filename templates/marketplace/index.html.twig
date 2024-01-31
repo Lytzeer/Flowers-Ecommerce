@@ -11,13 +11,13 @@
             <img src={{ asset('img/logo.png') }} alt="Logo" class="w-44">
         </a>        </div>
         <div class="navbar-center">
-            <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Home</a>
+            <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Home</a>
             <a href={{ path('app_marketplace') }} class="ml-8 border-b-2 border-black">Marketplace</a>
-            <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Contact Us</a>
+            <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
             <div class="w-66 mr-6">
-                <input type="text" placeholder="Search" class="w-32 h-10 border-2 border-black pl-3 rounded-xl focus:outline-none focus:w-80 transition-all">
+                <input type="text" placeholder="Search" class="w-32 h-10 border-2 border-black pl-3 rounded-xl focus:outline-none focus:w-80 transition-all" autocomplete="off">
             </div>  
             {# <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4"> #}
             {% if app.user %}
@@ -106,28 +106,26 @@
     <div class=" pb-4">
         {# <img src={{ asset('img/Hero.png') }} alt="Hero" class="w-full"> #}
     </div>
-    <div>
-        <div class="flex flex-col">
-            <div class="flex flex-wrap justify-evenly pb-4">
-                {% for article in articles %}
-                <a href="{{ path('app_article_show', {'id': article.id}) }}">
-                    <div class="m-2">
-                        <div class="pt-4">
-                            <div class="flex">
-                                <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover hover:opacity-80">
+        <div>
+            <div class="grid grid-cols-4 mt-3">
+                    {% for article in articles %}
+                    <div class="flex justify-center">
+                        <a href="{{ path('app_article_show', {'id': article.id}) }}">
+                            <div class="m-2">
+                                <div class="flex">
+                                    <img src={{ article.userPic }} alt={{ article.name }} class="w-96 h-96 object-cover hover:opacity-80 transition-all duration-300">
+                                </div>
+                                <h2 class="text-2xl font-bold">{{ article.name }}</h2>
+                                <p>{{ article.price }}€</p>
                             </div>
-                            <h2 class="text-2xl font-bold">{{ article.name }}</h2>
-                            <p>{{ article.price }}€</p>
-                        </div>
+                        </a>
                     </div>
-                </a>
-                {% else %}
-                    <tr>
-                        <td colspan="8">No articles found</td>
-                    </tr>
-                {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="8">No articles found</td>
+                        </tr>
+                    {% endfor %}
         </div>
-    </div>
     {% include '/_defaults/_newsletter.html.twig' %}
     {% include '/_defaults/_footer.html.twig' %}
 </div>
