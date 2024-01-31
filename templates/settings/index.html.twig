@@ -31,13 +31,14 @@
                 <button class="bg-red-500 text-black w-36 h-10 rounded-lg text-lg hover:bg-red-600">Logout</button>
             </a>
       </div>
+      {{ form_start(form) }}
         <div class="border-2 h-fit border-black rounded-lg mt-8 flex">
             <div class="ml-14 mr-28 w-1/2">
                 <div class="flex justify-between mt-5">
                     <a class="font-bold">Username</a>
                 </div>
                 <div class="bg-gray-100 my-6 rounded-lg h-16 items-center flex">
-                    <input class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="{{ user.username }}">
+                    {{ form_widget(form.username, {'attr': {'class': 'ml-7 w-full h-full bg-gray-100 focus:outline-none', 'placeholder': user.username}}) }}
                 </div>
             </div>
             <div class="ml-28 mr-14 w-1/2">
@@ -45,7 +46,7 @@
                     <a class="font-bold">E-mail</a>
                 </div>
                 <div class="bg-gray-100 my-6 rounded-lg h-16 items-center flex">
-                    <input class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="{{ user.email }}">
+                    {{ form_widget(form.email, {'attr': {'class': 'ml-7 w-full h-full bg-gray-100 focus:outline-none', 'placeholder': user.email}}) }}
                 </div>
             </div>
         </div>
@@ -55,7 +56,7 @@
                     <a class="font-bold">Password</a>
                 </div>
                 <div class="bg-gray-100 my-6 rounded-lg h-16 items-center flex">
-                    <input class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="*************">
+                    {{ form_widget(form.password, {'attr': {'class': 'ml-7 w-full h-full bg-gray-100 focus:outline-none', 'value': '*************'}}) }}
                 </div>
             </div>
             <div class="ml-28 mr-14 w-1/2">
@@ -63,7 +64,7 @@
                     <a class="font-bold">Confirm password</a>
                 </div>
                 <div class="bg-gray-100 my-6 rounded-lg h-16 items-center flex">
-                    <input class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="*************">
+                    <input type="password" class="ml-7 w-full h-full bg-gray-100 focus:outline-none" placeholder="*************">
                 </div>
             </div>
         </div>
@@ -79,9 +80,10 @@
                 </div>
             </div>
             <div class="flex items-end justify-end w-1/2">
-                <button class="bg-green-400 rounded-lg h-12 w-44 font-bold hover:bg-green-500">Save changes</button>
+                <button type="submit" class="bg-green-400 rounded-lg h-12 w-44 font-bold hover:bg-green-500">Save changes</button>
             </div>
         </div>
+        {{ form_end(form) }}
     </div>
   </div>
 </div>
