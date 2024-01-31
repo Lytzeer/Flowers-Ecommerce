@@ -51,6 +51,7 @@
                             <h1 class="font-semibold text-2xl pb-8 pt-4">Cart</h1>
                             {% set totalprice = 0 %}
                             {% for article in cart %}
+                            {% if article != null %}
                             <a href="{{ path('app_article_show', {'id': article.id}) }}">
                                 {# <div>
                                     <div class="pt-4">
@@ -63,7 +64,7 @@
                                 </div> #}
                                 <div class="flex flex-row justify-between">
                                             <div class="flex flex-row p-4">
-                                                <img src={{ article.user_pic }} alt={{ article.name }} class="w-20 h-20 object-cover">
+                                                <img src={{ asset('uploads/' ~ article.user_pic) }} alt={{ article.name }} class="w-20 h-20 object-cover">
                                                 <div class="flex flex-col pl-4">
                                                     <div class="flex pb-4">
                                                         <p class="font-bold text-sm">{{ article.name }}</p>
@@ -93,6 +94,7 @@
                                             </div>
                                         </div>
                             </a>
+                            {% endif %}
                             {% else %}
                                 <p class="text-center pb-8">No articles in cart</p>
                             {% endfor %}
@@ -118,38 +120,40 @@
             </div>
         </div>
     {# End Navbar #}
-    <div class="grid grid-cols-2">
-        <div class="col-start-1 flex flex-col p-14">
-            <div class="flex flex-col justify-center h-full">
-                <h1 class="text-secondary text-4xl font-bold pb-8">Contact Us</h1>
-                <div class="flex flex-col">
-                    <div class="pb-8">
-                        <input type="text" placeholder="Name" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
-                    </div>
-                    <div class="pb-8">
-                        <input type="text" placeholder="Email address" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
-                    </div>
-                    <div class="pb-8">
-                        <input type="text" placeholder="Your message" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
-                    </div>
+    <div class="w-screen h-screen">
+        <div class="flex h-4/5 justify-center items-center ratio mt-4" style="background-image: url('{{ asset('img/banner-min.jpg') }}'); background-repeat: no-repeat; background-size: 100% 100%">
+                <div class="col-start-1 flex flex-col p-y-14 w-2/5">
+                        <h1 class="text-secondary text-4xl font-bold pb-8">Contact Us</h1>
+                        <div class="flex flex-col">
+                            <div class="pb-8">
+                                <input type="text" placeholder="Name" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
+                            </div>
+                            <div class="pb-8">
+                                <input type="text" placeholder="Email address" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
+                            </div>
+                            <div class="pb-8">
+                                <input type="text" placeholder="Your message" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
+                            </div>
+                        </div>
+                        <label for="accept" class="flex flex-row justify-between w-11/12 pb-8">
+                            <div class="flex items-center select-none">
+                                <input type="checkbox" name="accept" class="checkbox border-black" id="checkbox">
+                                <label for="checkbox">
+                                <span class="pl-4">Please sign me up for the <span class="font-bold">Newsletter</span></span>
+                                </label>
+                            </div>
+                        </label>
+                        <div class="flex justify-center w-11/12">
+                            <a href={{ path('app_home') }}> 
+                                <button class="text-white bg-black px-7 py-2  border-black border text-lg font-bold rounded-lg hover:bg-white hover:text-black transition-all duration-300">SEND MESSAGE</button>
+                            </a>
+                        </div>
                 </div>
-                <label for="accept" class="flex flex-row justify-between w-11/12 pb-8">
-                    <div class="flex items-center">
-                        <input type="checkbox" name="accept" class="checkbox border-black">
-                        <span class="pl-4">Please sign me up for the <span class="font-bold">Newsletter</span></span>
-                    </div>
-                </label>
-                <div class="flex justify-center w-11/12">
-                    <a href={{ path('app_home') }}> 
-                        <button class="text-white bg-black px-7 py-2  border-black border text-lg font-bold rounded-lg hover:bg-white hover:text-black transition-all duration-300" type="">SEND MESSAGE</button>
-                    </a>
-                </div>
-            </div>
+            {# <div class="col-start-2"> #}
+                {# <img src="{{ asset('/img/contact_us.jpg') }}" alt="Contact Image" class="w-full h-full object-cover"> #}
+            {# </div> #}
         </div>
-        <div class="col-start-2">
-            <img src="{{ asset('/img/contact_us.jpg') }}" alt="Contact Image" class="w-full h-screen object-cover">
-        </div>
-    </div>
     {% include '/_defaults/_footer.html.twig' %}
-</div>
+    </div>
+</div>  
 {% endblock %}

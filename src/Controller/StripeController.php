@@ -49,7 +49,6 @@ class StripeController extends AbstractController
                             'unit_amount' => $article['price'] * 100,
                             'product_data' => [
                                 'name' => $article['name'],
-                                'images' => [$article['user_pic']],
                             ],
                         ],
                         'quantity' => $cart->getQuantity(),

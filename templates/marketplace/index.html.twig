@@ -9,7 +9,8 @@
         <div class="navbar-start">
         <a href="/">
             <img src={{ asset('img/logo.png') }} alt="Logo" class="w-44">
-        </a>        </div>
+        </a>        
+        </div>
         <div class="navbar-center">
             <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Home</a>
             <a href={{ path('app_marketplace') }} class="ml-8 border-b-2 border-black">Marketplace</a>
@@ -62,7 +63,7 @@
                                 </div> #}
                                 <div class="flex flex-row justify-between">
                                             <div class="flex flex-row p-4">
-                                                <img src={{ article.user_pic }} alt={{ article.name }} class="w-20 h-20 object-cover">
+                                                <img src={{ asset('uploads/' ~ article.user_pic) }} alt={{ article.name }} class="w-20 h-20 object-cover">
                                                 <div class="flex flex-col pl-4">
                                                     <div class="flex pb-4">
                                                         <p class="font-bold text-sm">{{ article.name }}</p>
@@ -117,9 +118,9 @@
             </div>
         </div>
     {# End Navbar #}
-    <div class=" pb-4">
-        <img src={{ asset('img/Hero.png') }} alt="Hero" class="w-full">
-    </div>
+        <div class="flex-col flex justify-center items-center my-3 h-80 w-full" style="background-image: url('{{ asset('img/marketplace.png') }}'); background-position: center; background-repeat: no-repeat; background-size: cover">            
+        <h2 class="font-bold text-5xl">MARKETPLACE</h2>
+        </div>
         <div>
             <div class="grid grid-cols-4 mt-3">
                     {% for article in articles %}
@@ -127,7 +128,7 @@
                         <a href="{{ path('app_article_show', {'id': article.id}) }}">
                             <div class="m-2">
                                 <div class="flex">
-                                    <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover hover:opacity-80 transition-all duration-300">
+                                    <img src={{ asset('uploads/' ~ article.userPic ) }} alt={{ article.name }} class="w-96 h-96 object-cover hover:opacity-80 transition-all duration-300">
                                 </div>
                                 <h2 class="text-2xl font-bold">{{ article.name }}</h2>
                                 <p>{{ article.price }}€</p>
@@ -135,9 +136,7 @@
                             </a>
                         </div>
                     {% else %}
-                        <div>
                             <p class="mt-48" colspan="8">No articles found</p>
-                        </div>
                     {% endfor %}
         </div>
     {% include '/_defaults/_newsletter.html.twig' %}

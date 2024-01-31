@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -114,9 +115,25 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
-    public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
+    #[Route('/delete/{id}', name: 'app_article_delete', methods: ['POST'])]
+    public function delete(Request $request, Article $article, EntityManagerInterface $entityManager, Filesystem $filesystem): Response
     {
+        $carts = $entityManager->getRepository(Cart::class)->findBy(['articleId' => $article->getId()]);
+
+        $userPic = $article->getUserPic();
+        if ($userPic) {
+            $filesystem->remove($this->getParameter('kernel.project_dir').'/public/uploads/'.$userPic);
+        }
+
+        foreach ($article->getReviews() as $review) {
+            $entityManager->remove($review);
+            $entityManager->flush();
+        }
+        foreach ($carts as $cart) {
+            $entityManager->remove($cart);
+            $entityManager->flush();
+        }
+
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
             $entityManager->remove($article);
             $entityManager->flush();

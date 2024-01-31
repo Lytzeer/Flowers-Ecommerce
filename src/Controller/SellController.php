@@ -7,6 +7,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Entity\Cart;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,23 @@ class SellController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('user_pic')->getData();
+
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+                try {
+                    $image->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads',
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    throw new \Exception('Error while uploading image');
+                }
+
+                $article->setUserPic($newFilename);
+            }
             $entityManager->persist($article);
             $entityManager->flush();
 

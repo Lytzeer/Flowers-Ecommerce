@@ -25,13 +25,12 @@
                 <td>{{ article.name }}</td>
                 <td>{{ article.description }}</td>
                 <td>{{ article.price }}</td>
-                <td>{{ article.user_pic }}</td>
+                <td>{{ article.userPic }}</td>
                 <td>{{ article.pubDate ? article.pubDate|date('Y-m-d') : '' }}</td>
                 <td>{{ article.authorId }}</td>
                 <td>
                     <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                    lorem
             </tr>
         {% else %}
             <tr>
