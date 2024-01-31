@@ -1,3 +1,5 @@
+# E-Commerce - Flowers
+
 ### RESUME
 
 Bienvenue sur FLOWERS 🌸, votre destination en ligne pour exprimer vos émotions à travers des fleurs exquises. Explorez notre site d'e-commerce convivial, conçu pour vous offrir une expérience florale exceptionnelle. Découvrez nos fonctionnalités uniques et parcourez nos différentes pages pour vivre une expérience de shopping florale inoubliable.
@@ -51,7 +53,7 @@ cloner le repo `git clone https://ytrack.learn.ynov.com/git/plukas/projet-symfon
 
 8 - vous aurez surement besoin d'enlever le `;` de `;extension=fileinfo` dans le `php.ini`
 
-9 - `npm run watch`
+9 - executer le [dump SQL](php_exam_db.sql) dans votre logiciel de gestion de base de donnée
 
 Vous pouvez maintenant lancer le projet !
 pour cela dans un terminal a la racine du projet `symfony serve` vous pourrez par defaut vous connecter [en localhost au port 8000](https://127.0.0.1:8000/)
