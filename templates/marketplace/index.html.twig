@@ -11,9 +11,9 @@
             <img src={{ asset('img/logo.png') }} alt="Logo" class="w-44">
         </a>        </div>
         <div class="navbar-center">
-            <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Home</a>
+            <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Home</a>
             <a href={{ path('app_marketplace') }} class="ml-8 border-b-2 border-black">Marketplace</a>
-            <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Contact Us</a>
+            <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
             <form action={{ path('app_marketplace') }} class="w-66 mr-6" method="POST">
@@ -120,6 +120,7 @@
     <div class=" pb-4">
         {# <img src={{ asset('img/Hero.png') }} alt="Hero" class="w-full"> #}
     </div>
+<<<<<<< HEAD
     <div>
         <div class="flex flex-col">
             <div class="flex flex-wrap justify-evenly after:justify-start pb-4">
@@ -129,19 +130,37 @@
                             <div class="pt-4">
                                 <div class="flex">
                                     <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover hover:opacity-80">
+=======
+        <div>
+            <div class="grid grid-cols-4 mt-3">
+                    {% for article in articles %}
+                    <div class="flex justify-center">
+                        <a href="{{ path('app_article_show', {'id': article.id}) }}">
+                            <div class="m-2">
+                                <div class="flex">
+                                    <img src={{ article.userPic }} alt={{ article.name }} class="w-96 h-96 object-cover hover:opacity-80 transition-all duration-300">
+>>>>>>> 2479a7514c1a41e9985546cc9cc8186f817cd41e
                                 </div>
                                 <h2 class="text-2xl font-bold">{{ article.name }}</h2>
                                 <p>{{ article.price }}€</p>
                             </div>
+<<<<<<< HEAD
                         </div>
                     </a>
                     {% else %}
                         <div>
                             <p class="mt-48" colspan="8">No articles found</p>
                         </div>
+=======
+                        </a>
+                    </div>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">No articles found</td>
+                        </tr>
+>>>>>>> 2479a7514c1a41e9985546cc9cc8186f817cd41e
                     {% endfor %}
         </div>
-    </div>
     {% include '/_defaults/_newsletter.html.twig' %}
     {% include '/_defaults/_footer.html.twig' %}
 </div>

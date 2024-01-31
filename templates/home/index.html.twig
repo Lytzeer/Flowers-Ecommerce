@@ -10,8 +10,8 @@
         </a>        </div>
         <div class="navbar-center">
             <a href={{ path('app_home') }} class="ml-8 border-b-2 border-black">Home</a>
-            <a href={{ path('app_marketplace') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Marketplace</a>
-            <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Contact Us</a>
+            <a href={{ path('app_marketplace') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Marketplace</a>
+            <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
             <form action={{ path('app_marketplace') }} class="w-66 mr-6" method="POST">
@@ -148,7 +148,7 @@
                     <div>
                         <div class="pt-4">
                             <div class="flex flex-row">
-                                <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover hover:opacity-80">
+                                <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover hover:opacity-80 transition-all duration-300">
                             </div>
                             <h2 class="text-2xl font-bold">{{ article.name }}</h2>
                             <p>{{ article.price }}€</p>

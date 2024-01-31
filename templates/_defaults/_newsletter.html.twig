@@ -1,11 +1,13 @@
 {# Newsletter #}
-    <div class="w-full flex-col flex justify-center items-center mt-20 bg-[url('https://i.imgur.com/ousswBn.png')] bg-cover h-96">
+    <div class="w-full flex-col flex justify-center items-center mt-20 h-80 object-cover" style="background-image: url('{{ asset('img/Newsletter.png') }}')">
         <h2 class="font-bold text-5xl mb-4">JOIN OUR NEWSLETTER</h2>
         <p class="mb-9 text-xl">Sign up for deals, new products and promotions</p>
         <div class="flex flex-row border-b border-gray-400 pb-2 items-center">
             <img src={{ asset("img/mail.svg")}} alt="mail icon" class="h-7 w-7 mr-3 ">
-            <input placeholder="Email address" class="focus:outline-none w-96 bg-white">
-            <button class="text-white bg-black px-7 py-2  border-black border text-lg font-bold rounded-lg hover:bg-white hover:text-black transition-all duration-300" type="">Sign Up</button>
+            {# <form action={{ path('newsletter') }} method="POST"> #}
+                <input placeholder="Email address" class="focus:outline-none w-96" name="email" autocomplete="off">
+                <button class="text-white bg-black px-7 py-2  border-black border text-lg font-bold rounded-lg hover:bg-white hover:text-black transition-all duration-300" type="submit">Sign Up</button>
+            {# </form> #}
         </div>
     </div>
 {# End Newsletter #}

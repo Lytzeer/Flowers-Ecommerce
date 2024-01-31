@@ -12,14 +12,14 @@
         </a>
         </div>
         <div class="navbar-center">
-            <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Home</a>
-            <a href={{ path('app_marketplace') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Marketplace</a>
+            <a href={{ path('app_home') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Home</a>
+            <a href={{ path('app_marketplace') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50 transition duration-300">Marketplace</a>
             <a href={{ path('app_contact_us') }} class="ml-8 border-b-2 border-black">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
-            <form action={{ path('app_marketplace') }} class="w-66 mr-6" method="POST">
-                <input autocomplete="off" name="search" type="text" placeholder="Search" class="bg-white w-32 h-10 border-2 border-black pl-3 rounded-xl focus:outline-none focus:w-80 transition-all">
-            </form>  
+            <div class="w-66 mr-6">
+                <input type="text" placeholder="Search" class="w-32 h-10 border-2 border-black pl-3 rounded-xl focus:outline-none focus:w-80 transition-all">
+            </div>  
             {# <img src={{ asset('img/search.svg') }} alt="Search" cla3ss="pr-4"> #}
             {% if app.user %}
                 <a href= {{ path('app_dashboard')}}>
@@ -124,13 +124,13 @@
                 <h1 class="text-secondary text-4xl font-bold pb-8">Contact Us</h1>
                 <div class="flex flex-col">
                     <div class="pb-8">
-                        <input type="text" placeholder="Name" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4">
+                        <input type="text" placeholder="Name" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
                     </div>
                     <div class="pb-8">
-                        <input type="text" placeholder="Email address" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4">
+                        <input type="text" placeholder="Email address" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
                     </div>
                     <div class="pb-8">
-                        <input type="text" placeholder="Your message" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4">
+                        <input type="text" placeholder="Your message" class="bg-transparent border-b-2 border-gray-400 outline-none w-11/12 pb-4" autocomplete="off">
                     </div>
                 </div>
                 <label for="accept" class="flex flex-row justify-between w-11/12 pb-8">
