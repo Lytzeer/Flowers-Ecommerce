@@ -19,11 +19,12 @@ class SettingsController extends AbstractController
         }
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
-            
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
         return $this->render('settings/index.html.twig', [
             'controller_name' => 'SettingsController',
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
             'user' => $this->getUser(),
         ]);
     }

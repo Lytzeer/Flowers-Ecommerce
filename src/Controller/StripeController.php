@@ -27,6 +27,7 @@ class StripeController extends AbstractController
     {
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
 
         $fname = $request->request->get('fname');
@@ -40,17 +41,21 @@ class StripeController extends AbstractController
         Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
 
         foreach ($cart as $article) {
-            $checkout_session['line_items'][] = [
-                'price_data' => [
-                  'currency' => 'eur',
-                  'unit_amount' => $article["price"] * 100,
-                  'product_data' => [
-                    'name' => $article["name"],
-                    'images' => [$article["user_pic"]],
-                  ],
-                ],
-                'quantity' => 1,
-              ];
+            foreach ($carts as $cart) {
+                if ($cart->getArticleId() == $article['id']) {
+                    $checkout_session['line_items'][] = [
+                        'price_data' => [
+                            'currency' => 'eur',
+                            'unit_amount' => $article['price'] * 100,
+                            'product_data' => [
+                                'name' => $article['name'],
+                                'images' => [$article['user_pic']],
+                            ],
+                        ],
+                        'quantity' => $cart->getQuantity(),
+                    ];
+                }
+            }
         }
 
         $checkout_session = Session::create([

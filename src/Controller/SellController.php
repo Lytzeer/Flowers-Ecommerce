@@ -32,10 +32,12 @@ class SellController extends AbstractController
         }
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
         return $this->render('sell/index.html.twig', [
             'controller_name' => 'SellController',
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
             'article' => $article,
             'form' => $form,
         ]);

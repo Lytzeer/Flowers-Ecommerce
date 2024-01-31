@@ -17,12 +17,14 @@
           <p class="font-bold pl-5">Settings</p>
           </button>
         </a>
+        {% if is_granted('ROLE_ADMIN') %}
         <a href={{ path('admin') }}>
             <button class="h-20 w-full items-center pl-14 flex hover:bg-gray-200 opacity-50">
                 <img src={{ asset('img/admin_logo.svg') }} class="w-10 h-10">
                 <p class="pl-5">Admin</p>
             </button>
         </a>
+        {% endif %}
     </div>
     <div class="px-20 w-full">
       <div class="flex w-full justify-between">

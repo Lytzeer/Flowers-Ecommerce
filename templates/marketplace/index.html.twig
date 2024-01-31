@@ -16,9 +16,9 @@
             <a href={{ path('app_contact_us') }} class="ml-8 hover:text-green-500 hover:font-bold opacity-50">Contact Us</a>
         </div>
         <div class="navbar-end pr-8">
-            <div class="w-66 mr-6">
-                <input type="text" placeholder="Search" class="w-32 h-10 border-2 border-black pl-3 rounded-xl focus:outline-none focus:w-80 transition-all">
-            </div>  
+            <form action={{ path('app_marketplace') }} class="w-66 mr-6" method="POST">
+                <input autocomplete="off" name="search" type="text" placeholder="Search" class="bg-white w-32 h-10 border-2 border-black pl-3 rounded-xl focus:outline-none focus:w-80 transition-all">
+            </form>  
             {# <img src={{ asset('img/search.svg') }} alt="Search" class="pr-4"> #}
             {% if app.user %}
                 <a href= {{ path('app_dashboard')}}>
@@ -61,33 +61,47 @@
                                     </div>
                                 </div> #}
                                 <div class="flex flex-row justify-between">
-                                    <div class="flex flex-row p-4">
-                                        <img src={{ article.user_pic }} alt={{ article.name }} class="w-20 h-20 object-cover">
-                                        <div class="flex flex-col pl-4">
-                                            <p class="font-bold pb-4 text-sm">{{ article.name }}</p>
-                                            <div class="flex items-center pt-2">
-                                                {# <div class="border-transparent bg-slate-100 rounded">
-                                                    <button class="pl-2">-</button>
-                                                    <button class="px-2">2</button>
-                                                    <button class="pr-2">+</button>
-                                                </div> #}
-                                                <p class="font-bold pb-4 text-sm">{{ article.price }}€</p>
-                                                {% set totalprice = totalprice + article.price %}
+                                            <div class="flex flex-row p-4">
+                                                <img src={{ article.user_pic }} alt={{ article.name }} class="w-20 h-20 object-cover">
+                                                <div class="flex flex-col pl-4">
+                                                    <div class="flex pb-4">
+                                                        <p class="font-bold text-sm">{{ article.name }}</p>
+                                                        <div class="border-transparent bg-slate-100 ml-2 rounded">
+                                                            {# <button class="pl-2">-</button> #}
+                                                            {% for cart in carts %}
+                                                                {% if cart.articleId == article.id %}
+                                                                    <button class="px-2">{{ cart.quantity }}</button>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            {# <button class="pr-2">+</button> #}
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-between items-center pt-2 pb-4">
+                                                        {% for cart in carts %}
+                                                            {% if cart.articleId == article.id %}
+                                                                <p class="font-bold text-sm">{{ article.price * cart.quantity }}€</p>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {% for cart in carts %}
+                                                            {% if cart.articleId == article.id %}
+                                                                {% set totalprice = totalprice + article.price * cart.quantity %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
                             </a>
                             {% else %}
                                 <p class="text-center pb-8">No articles in cart</p>
                             {% endfor %}
-                                {% if articles %}
+                                {% if cart %}
                                 <div class="divider"></div>
-                                <div class="flex flex-row justify-between">
+                                <div class="flex flex-row justify-between mb-4">
                                     <p class="font-bold text-sm">Total</p>
                                     <p class="font-bold text-sm">{{ totalprice }}€</p>
                                 </div>
-                               <a href="/cart2">
+                                <a href="/cart2">
                                     <button class="text-white bg-black px-7 py-2  border-black border font-bold rounded-xl hover:bg-white hover:text-black transition-all duration-300 w-full mt-3" type="">CHECKOUT</button>
                                 </a>
                                 {% endif %}
@@ -108,24 +122,24 @@
     </div>
     <div>
         <div class="flex flex-col">
-            <div class="flex flex-wrap justify-evenly pb-4">
-                {% for article in articles %}
-                <a href="{{ path('app_article_show', {'id': article.id}) }}">
-                    <div class="m-2">
-                        <div class="pt-4">
-                            <div class="flex">
-                                <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover hover:opacity-80">
+            <div class="flex flex-wrap justify-evenly after:justify-start pb-4">
+                    {% for article in articles %}
+                    <a href="{{ path('app_article_show', {'id': article.id}) }}">
+                        <div class="m-2">
+                            <div class="pt-4">
+                                <div class="flex">
+                                    <img src={{ article.userPic }} alt={{ article.name }} class="w-80 h-80 object-cover hover:opacity-80">
+                                </div>
+                                <h2 class="text-2xl font-bold">{{ article.name }}</h2>
+                                <p>{{ article.price }}€</p>
                             </div>
-                            <h2 class="text-2xl font-bold">{{ article.name }}</h2>
-                            <p>{{ article.price }}€</p>
                         </div>
-                    </div>
-                </a>
-                {% else %}
-                    <tr>
-                        <td colspan="8">No articles found</td>
-                    </tr>
-                {% endfor %}
+                    </a>
+                    {% else %}
+                        <div>
+                            <p class="mt-48" colspan="8">No articles found</p>
+                        </div>
+                    {% endfor %}
         </div>
     </div>
     {% include '/_defaults/_newsletter.html.twig' %}

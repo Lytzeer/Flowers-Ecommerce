@@ -16,10 +16,12 @@ class ContactUsController extends AbstractController
     {
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
         return $this->render('contact_us/index.html.twig', [
             'controller_name' => 'ContactUsController',
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
         ]);
     }
 }

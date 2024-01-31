@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>UserId</th>
                 <th>ArticleId</th>
+                <th>Quantity</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ cart.id }}</td>
                 <td>{{ cart.userId }}</td>
                 <td>{{ cart.articleId }}</td>
+                <td>{{ cart.quantity }}</td>
                 <td>
                     <a href="{{ path('app_cart_show', {'id': cart.id}) }}">show</a>
                     <a href="{{ path('app_cart_edit', {'id': cart.id}) }}">edit</a>

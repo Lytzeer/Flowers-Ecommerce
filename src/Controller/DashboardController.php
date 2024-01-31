@@ -23,12 +23,14 @@ class DashboardController extends AbstractController
             $userId = $this->getUser()->getId();
             $articles = $entityManager->getRepository(Article::class)->findBy(['author_id' => $userId]);
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($userId);
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
 
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
             'articles' => $articles ?? null,
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
         ]);
     }
 }

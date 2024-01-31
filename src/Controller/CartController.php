@@ -25,9 +25,33 @@ class CartController extends AbstractController
     #[Route('/new', name: 'app_cart_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $articleId = $request->query->get('article_id');
+        $carts = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+
+        foreach ($carts as $item) {
+            if ($item['id'] == $articleId) {
+                $cart = $entityManager->getRepository(Cart::class)->findOneBy(['articleId' => $articleId, 'userId' => $this->getUser()->getId()]);
+
+                if ($request->get('quantity') == 'minus') {
+                    if ($cart->getQuantity() > 1) {
+                        $cart->setQuantity($cart->getQuantity() - 1);
+                        $entityManager->flush();
+                    }
+                } else {
+                    if ($cart->getQuantity() < 10) {
+                        $cart->setQuantity($cart->getQuantity() + 1);
+                        $entityManager->flush();
+                    }
+                }
+
+                return $this->redirectToRoute('app_cart', [], Response::HTTP_SEE_OTHER);
+            }
+        }
+
         $cart = new Cart();
         $cart->setUserId($this->getUser()->getId());
-        $cart->setArticleId($request->get('article_id'));
+        $cart->setArticleId($articleId);
+        $cart->setQuantity(1);
 
         $entityManager->persist($cart);
         $entityManager->flush();

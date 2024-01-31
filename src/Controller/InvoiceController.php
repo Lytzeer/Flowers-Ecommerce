@@ -6,10 +6,13 @@ use App\Entity\Invoice;
 use App\Form\InvoiceType;
 use App\Repository\InvoiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Cart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 #[Route('/invoice')]
 class InvoiceController extends AbstractController  
@@ -43,10 +46,28 @@ class InvoiceController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_invoice_show', methods: ['GET'])]
-    public function show(Invoice $invoice): Response
+    public function show(Invoice $invoice, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('invoice/show.html.twig', [
+        $html = $this->renderView('invoice/show.html.twig', [
             'invoice' => $invoice,
+            'carts' => $carts ?? null,
+            'title' => 'PDF Title',
+            'content' => 'PDF Content',
+        ]);
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+
+        $dompdf->render();
+
+        $output = $dompdf->output();
+        
+        return new Response($output, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="example.pdf"'
         ]);
     }
 

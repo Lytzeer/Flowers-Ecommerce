@@ -19,10 +19,12 @@ class UpdateController extends AbstractController
         }
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
         return $this->render('update/index.html.twig', [
             'controller_name' => 'UpdateController',
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
         ]);
     }
 }

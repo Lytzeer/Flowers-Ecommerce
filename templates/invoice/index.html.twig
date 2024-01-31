@@ -17,6 +17,7 @@
                 <th>Address</th>
                 <th>Postal</th>
                 <th>Price</th>
+                <th>Articles</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,6 +33,11 @@
                 <td>{{ invoice.address }}</td>
                 <td>{{ invoice.postal }}</td>
                 <td>{{ invoice.price }}</td>
+                <td>
+                {% for article in invoice.article %}
+                    {{ article.name }}
+                {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('app_invoice_show', {'id': invoice.id}) }}">show</a>
                     <a href="{{ path('app_invoice_edit', {'id': invoice.id}) }}">edit</a>

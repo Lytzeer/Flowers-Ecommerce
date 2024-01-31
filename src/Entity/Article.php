@@ -37,6 +37,9 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Review::class)]
     private Collection $reviews;
 
+    #[ORM\ManyToMany(targetEntity: Invoice::class, mappedBy: 'article')]
+    private Collection $invoices;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,6 +120,7 @@ class Article
         $this->pub_date = new \DateTime;    
         $this->author_id = $user;
         $this->reviews = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
     }
 
     /**
@@ -144,6 +148,33 @@ class Article
             if ($review->getArticle() === $this) {
                 $review->setArticle(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Invoice>
+     */
+    public function getInvoices(): Collection
+    {
+        return $this->invoices;
+    }
+
+    public function addInvoice(Invoice $invoice): static
+    {
+        if (!$this->invoices->contains($invoice)) {
+            $this->invoices->add($invoice);
+            $invoice->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoice(Invoice $invoice): static
+    {
+        if ($this->invoices->removeElement($invoice)) {
+            $invoice->removeArticle($this);
         }
 
         return $this;

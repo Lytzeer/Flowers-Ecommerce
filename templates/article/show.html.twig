@@ -11,12 +11,25 @@
         </div>
         <div class="w-1/3">
             <div class="flex flex-col pl-4 w-3/4">
+                {% if reviews|length != 0 %}
+                    {% set totalStars = 0 %}
+                    {% for review in reviews %}
+                        {% set totalStars = totalStars + review.stars %}
+                    {% endfor %}
+
+                    {% set averageStars = totalStars / reviews|length %}
+                {% else %}
+                    {% set averageStars = 0 %}
+                {% endif %}
+
                 <div class="flex mb-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    {% for i in 1..5 %}
+                        {% if i <= averageStars %}
+                            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                        {% else %}
+                            <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+                        {% endif %}
+                    {% endfor %}
                     <p class="text-xs">{{ reviews | length }} Reviews</p>
                 </div>
                 <h1 class="text-4xl font-bold">{{ article.name }}</h1>
@@ -50,11 +63,13 @@
         <div class="divider"></div>
         <p class="font-bold text-xl mt-12">Customer Reviews</p>
         <div class="flex mb-1 mt-6">
-            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-            <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
-            <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+            {% for i in 1..5 %}
+                {% if i <= averageStars %}
+                    <img src={{ asset("img/star_icon_full.svg")}} alt="star" class="mr-1">
+                    {% else %}
+                        <img src={{ asset("img/star_icon_empty.svg")}} alt="star" class="mr-1">
+                    {% endif %}
+                {% endfor %}
             <p class="text-xs">{{ reviews | length }} Reviews</p>
         </div>
         <div class="flex mt-3">

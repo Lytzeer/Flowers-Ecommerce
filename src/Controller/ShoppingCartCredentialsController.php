@@ -19,10 +19,12 @@ class ShoppingCartCredentialsController extends AbstractController
         }
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
         return $this->render('shopping_cart_credentials/index.html.twig', [
             'controller_name' => 'ShoppingCartCredentialsController',
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
         ]);
     }
 }

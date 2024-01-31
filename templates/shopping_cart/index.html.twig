@@ -72,24 +72,37 @@
                             <div class="flex items-center">
                                 <div class="border-2 border-gray-300 rounded w-20 py-1 flex justify-around">
                                     {# <button class="px-2">1</button> #}
-                                    <button>-</button>
-                                    <p>1</p>
-                                    <button>+</button>
+                                    
+                                    <a href={{ path('app_cart_new', {'article_id': article.id, 'quantity': 'minus'}) }}>-</a>
+                                    {% for cart in carts %}
+                                        {% if cart.articleId == article.id %}
+                                            <p>{{ cart.quantity }}</p>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <a href={{ path('app_cart_new', {'article_id': article.id}) }}>+</a>
                                 </div>
                             </div>
                             <p></p>
                             <div class="flex items-center">
-                                <p>{{ article.price }}€</p>
+                                {% for cart in carts %}
+                                    {% if cart.articleId == article.id %}
+                                        <p>{{ article.price * cart.quantity }}€</p>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
-                        {% set result = result + article.price %}
+                        {% for cart in carts %}
+                            {% if cart.articleId == article.id %}
+                                {% set result = result + article.price * cart.quantity %}
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
                 {% endfor %}
             <div class="w-5/12 pt-8">
-                <div class="flex flex-row justify-between">
+                {# <div class="flex flex-row justify-between">
                     <p>Taxes</p>
                     <p>13.99€</p>
-                </div>
+                </div> #}
                 <div class="flex flex-row justify-between">
                     <p>Total</p>
                     <p>{{ result }}€</p>
@@ -105,7 +118,7 @@
                     <p class="mb-4 text-sm">Add your code for an instant cart discount</p>
                     <div class="flex items-center border-2 border-gray-400 px-4 py-3 rounded-lg w-2/3">
                         <img src={{ asset('img/coupon_icon.svg') }} alt="coupon icon" class="mr-2">
-                        <input placeholder="Coupon Code" class="focus:outline-none w-full">
+                        <input placeholder="Coupon Code" class="bg-white focus:outline-none w-full">
                         <button>Apply</button>
                     </div>
                 </div>

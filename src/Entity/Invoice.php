@@ -16,8 +16,9 @@ class Invoice
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'invoice', targetEntity: User::class)]
-    private Collection $user;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -43,9 +44,15 @@ class Invoice
     #[ORM\Column]
     private ?float $price = null;
 
+    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'invoices')]
+    private Collection $article;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $quantity = [];
+
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->article = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,32 +60,14 @@ class Invoice
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUser(): Collection
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function addUser(User $user): static
+    public function setUser(User $user): static
     {
-        if (!$this->user->contains($user)) {
-            $this->user->add($user);
-            $user->setInvoice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        if ($this->user->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getInvoice() === $this) {
-                $user->setInvoice(null);
-            }
-        }
+        $this->user = $user;
 
         return $this;
     }
@@ -175,6 +164,42 @@ class Invoice
     public function setPrice(float $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticle(): Collection
+    {
+        return $this->article;
+    }
+
+    public function addArticle(Article $article): static
+    {
+        if (!$this->article->contains($article)) {
+            $this->article->add($article);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        $this->article->removeElement($article);
+
+        return $this;
+    }
+
+    public function getQuantity(): array
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(array $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

@@ -52,6 +52,7 @@ class ArticleController extends AbstractController
     {
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
         $user = $entityManager->getRepository(User::class)->findUserById($article->getAuthorId());
         $reviews = $article->getReviews();
@@ -76,6 +77,7 @@ class ArticleController extends AbstractController
             'article' => $article,
             'reviews' => $reviews,
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
             'form' => $form,
         ]);
     }
@@ -92,6 +94,7 @@ class ArticleController extends AbstractController
         }
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -100,12 +103,14 @@ class ArticleController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_article_show', ['id' => $article->getId()], Response::HTTP_SEE_OTHER);
+            
         }
 
         return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form,
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
         ]);
     }
 

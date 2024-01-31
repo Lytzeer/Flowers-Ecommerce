@@ -19,12 +19,14 @@ class HomeController extends AbstractController
         $articles = $entityManager->getRepository(Article::class)->findLatestArticles();
         if ($this->getUser() != null) {
             $cart = $entityManager->getRepository(Cart::class)->findAllArticlesByUserId($this->getUser()->getId());
+            $carts = $entityManager->getRepository(Cart::class)->findBy(['userId' => $this->getUser()->getId()]);
         }
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'articles' => $articles,
             'cart' => $cart ?? null,
+            'carts' => $carts ?? null,
         ]);
     }
 }

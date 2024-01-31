@@ -51,23 +51,25 @@
             <div class="w-1/4 pb-16">
                 <div class="flex flex-row justify-between items-center pb-4">
                     <h2 class="text-base opacity-50">Order code:</h2>
-                    <p class="text-base font-bold">#01234_45678</p>
+                    <p class="text-base font-bold">{{ invoice.id }}</p>
                 </div>
                 <div class="flex flex-row justify-between items-center pb-4">
                     <h2 class="text-base opacity-50">Date:</h2>
-                    <p class="text-base font-bold">January 16, 2024</p>
+                    <p class="text-base font-bold">{{ invoice.date ? invoice.date|date('Y-m-d') : '' }}</p>
                 </div>
                 <div class="flex flex-row justify-between items-center pb-4">
                     <h2 class="text-base opacity-50">Total:</h2>
-                    <p class="text-base font-bold">134,95€</p>
+                    <p class="text-base font-bold">{{ invoice.price }}€</p>
                 </div>
                 <div class="flex flex-row justify-between items-center pb-8">
                     <h2 class="text-base opacity-50">Payment method:</h2>
                     <p class="text-base font-bold">Credit Card</p>
                 </div>
-                <button class="flex flex-row justify-center items-center bg-black text-white rounded-xl h-12 w-full">
-                    <p class="font-bold text-sm">DOWNLOAD INVOICE</p>
-                </button>
+                <a href={{ path('app_invoice_show', {'id': invoice.id}) }}>
+                    <button class="flex flex-row justify-center items-center bg-black text-white rounded-xl h-12 w-full">
+                        <p class="font-bold text-sm">Download invoice as PDF</p>
+                    </button>
+                </a>
             </div>
         </div>
     </div>

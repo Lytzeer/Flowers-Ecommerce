@@ -19,6 +19,9 @@ class Cart
     #[ORM\Column]
     private ?int $articleId = null;
 
+    #[ORM\Column]
+    private ?int $quantity = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Cart
     public function setArticleId(int $articleId): static
     {
         $this->articleId = $articleId;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }
